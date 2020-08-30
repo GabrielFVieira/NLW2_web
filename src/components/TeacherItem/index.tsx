@@ -2,25 +2,29 @@ import React from 'react';
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
+import { User } from '../../contexts/auth';
 import api from '../../services/api';
 
 import './styles.css';
 
-export interface Teacher {
+interface Subject {
     id: number,
-    subject: string,
+    name: string
+}
+
+export interface TeacherClasses {
+    id: number,
+    subject: Subject,
     cost: number,
-    name: string,
-    avatar: string,
-    whatsapp: string,
-    bio: string
+    description?: number,
+    user: User
 }
 
-interface TeacherItemProps {
-    teacher: Teacher;
+interface ClassItemProps {
+    teacher: TeacherClasses;
 }
 
-const TeacherItem:React.FC <TeacherItemProps> = ({ teacher }) => {
+const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
     function createNewConnection() {
         api.post('/connections', {
             user_id: teacher.id,
@@ -30,21 +34,21 @@ const TeacherItem:React.FC <TeacherItemProps> = ({ teacher }) => {
     return (
         <article className="teacher-item">
             <header>
-                <img src={teacher.avatar} alt={teacher.name}/>
+                <img src={teacher.user.avatar} alt={teacher.user.name}/>
                 <div>
-                    <strong>{teacher.name}</strong>
-                    <span>{teacher.subject}</span>
+                    <strong>{`${teacher.user.name} ${teacher.user.surname}`}</strong>
+                    <span>{teacher.subject.name}</span>
                 </div>
             </header>
 
-            <p>{teacher.bio}</p>
+            <p>{teacher.description}</p>
 
             <footer>
                 <p>
                     Preço/hora:
-                    <strong>{teacher.cost}</strong>
+                    <strong>R${teacher.cost}</strong>
                 </p>
-                <a target="_blank" rel="noopener noreferrer" onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`}>
+                <a target="_blank" rel="noopener noreferrer" onClick={createNewConnection} href={`https://wa.me/${teacher.user.whatsapp}`}>
                     <img src={whatsappIcon} alt="Whatsapp"/>
                     Entrar em contato
                 </a>

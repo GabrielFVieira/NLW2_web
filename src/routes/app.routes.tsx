@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
-import TeacherList from './pages/TeacherList';
-import TeacherForm from './pages/TeacherForm';
 
-function Routes() {
+import Landing from '../pages/Landing';
+import TeacherList from '../pages/TeacherList';
+import TeacherForm from '../pages/TeacherForm';
+
+function AppRoutes() {
     return (
         <BrowserRouter>
             <Route path="/" exact component={Landing} />
@@ -14,4 +15,4 @@ function Routes() {
     )
 }
 
-export default Routes;
+export default AppRoutes;

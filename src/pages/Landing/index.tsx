@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 import logoImg from '../../assets/images/logo.svg';
+import logoutImg from '../../assets/images/icons/logout.svg';
 import landingImg from '../../assets/images/landing.svg';
 
 import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 
+import { useAuth } from '../../contexts/auth';
 import api from '../../services/api';
 
 import './styles.css';
 
 function Landing() {
+    const { user, signOut } = useAuth();
     const [totalConnections, setTotalConnections] = useState(0);
 
     useEffect(() => {
@@ -22,8 +25,21 @@ function Landing() {
         })
     }, []);
 
+    function handleLogout() {
+        signOut();
+    }
+
     return (
         <div id="page-landing">
+            <div id="page-landing-header" className="container">
+                <Link to="/user-info" className="user-info">
+                    <img src={user && user.avatar ? user.avatar : studyIcon} alt={user?.name} className="user-icon"/>
+                    {user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
+                </Link>
+                
+                <img src={logoutImg} onClick={handleLogout} alt="Sair" className="logout-button"/>
+            </div>
+
             <div id="page-landing-content" className="container">
                 <div id="div" className="logo-container">
                     <img src={logoImg} alt="Proffy"/>

@@ -21,6 +21,7 @@
     --color-box-footer: #FAFAFC;
     --color-danger: #e33d3d;
     --color-danger-dark: #be3333;
+    --color-input-disabled: #DCDCE5;
 }
 
 * {

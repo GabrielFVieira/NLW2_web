@@ -1,7 +1,7 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 
 import PageHeader from '../../components/PageHeader';
-import TeacherItem, { Teacher } from '../../components/TeacherItem';
+import TeacherItem, { TeacherClasses } from '../../components/TeacherItem';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 
@@ -9,13 +9,33 @@ import api from '../../services/api';
 
 import './styles.css';
 
+interface SubjectItem {
+    id: number,
+    name: string
+}
+
 function TeacherList() {
     const [teachers, setTeachers] = useState([]);
+    const [subjects, setSubjects] = useState([]);
 
     const [subject, setSubject] = useState('');
     const [week_day, setWeekDay] = useState('');
     const [time, setTime] = useState('');
-    
+
+    useEffect(() => {
+        api.get('classes').then(response => {
+            setTeachers(response.data);
+        })
+
+        api.get('subjects').then(response => {
+            const subjectsOptions = response.data.map((subjectItem:SubjectItem) => {
+                return { value: subjectItem.id, label: subjectItem.name };
+            })
+
+            setSubjects(subjectsOptions);
+        })
+    }, []);
+
     async function searchTeacher(e: FormEvent) {
         e.preventDefault();
 
@@ -38,12 +58,7 @@ function TeacherList() {
                         name="subject" 
                         label="Matéria"
                         value={subject}
-                        options={[
-                            { value: 'artes', label: "Artes" },
-                            { value: 'matematica', label: "Matemática" },
-                            { value: 'portugues', label: "Português" },
-                            { value: 'geografia', label: "Geografia" }
-                        ]}
+                        options={subjects}
                         onChange={ (e) => {setSubject(e.target.value)} }
                     />
                     <Select 
@@ -71,7 +86,7 @@ function TeacherList() {
 
             <main>
                 {teachers.length > 0 ? 
-                    teachers.map((teacher:Teacher) => {
+                    teachers.map((teacher:TeacherClasses) => {
                         return <TeacherItem key={teacher.id} teacher={teacher} />;
                     }) :
                     <div className="emptyMessage">
