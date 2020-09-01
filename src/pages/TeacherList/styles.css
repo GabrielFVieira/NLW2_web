@@ -7,6 +7,10 @@
     margin-top: 3.2rem;
 }
 
+#search-teachers .input-block {
+    margin-top: 1.4rem;
+}
+
 #search-teachers label {
     color: var(--color-text-in-primary)
 }
@@ -63,7 +67,8 @@
     }
 
     #search-teachers .input-block + .input-block,
-    #search-teachers .select-block + .select-block {
+    #search-teachers .select-block + .select-block,
+    #search-teachers .input-block {
         margin-top: 0;
     }
 

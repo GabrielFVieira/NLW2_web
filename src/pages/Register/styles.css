@@ -42,14 +42,19 @@
     margin: 0.8rem 2rem 0;
 }
 
-#page-register main {
+.register-container main {
+    height: 100%;
     width: 100%;
     max-width: 40rem;
-    margin: auto 5rem;
+    margin: 0 3rem;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .backButton {
-    display: flex;
+    width: min-content;
     -webkit-tap-highlight-color: transparent;
 }
 

@@ -1,0 +1,58 @@
+#page-register-realized {
+    width: 100vw;
+    height: 100vh;
+
+    background: url('../../assets/images/success-background.svg') no-repeat center var(--color-primary);
+    background-size: contain;
+    background-origin: content-box;
+    padding: 13rem 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-message-container h1 {
+    font: 700 5.6rem Archivo;
+    color: var(--color-title-in-primary);
+    margin-top: 2.8rem;
+    text-align: center;
+}
+
+.page-message-container p {
+    font: 500 1.6rem Poppins;
+    color: var(--color-text-in-primary);
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#page-register-realized button {
+    width: 20rem;
+    height: 5.6rem;
+    min-height: 50px;
+    background: var(--color-secundary);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 6.8rem;
+    margin-bottom: 1.2rem;
+}
+
+#page-register-realized button:hover {
+    background: var(--color-secundary-dark);
+}

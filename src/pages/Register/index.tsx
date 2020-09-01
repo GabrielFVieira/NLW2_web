@@ -26,8 +26,7 @@ function Register() {
             email,
             password,
         }).then(() => {
-            alert('Cadastro realizado com sucesso!')
-            history.push('/');
+            history.push('/register-success');
         }).catch(() => {
             alert('Erro ao realizar cadastro')
         });
@@ -65,6 +64,8 @@ function Register() {
                             </button>
                         </footer>
                     </form>
+
+                    <div></div>
                 </main>
             </div>
         </div>
