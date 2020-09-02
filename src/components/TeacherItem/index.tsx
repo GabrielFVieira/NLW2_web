@@ -31,6 +31,15 @@ const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
         })
     }
     
+    function formatMoney(value: number) {
+        var formatter = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          });
+          
+        return formatter.format(value);
+    }
+
     return (
         <article className="teacher-item">
             <header>
@@ -46,7 +55,7 @@ const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
             <footer>
                 <p>
                     Preço/hora:
-                    <strong>R${teacher.cost}</strong>
+                    <strong>{formatMoney(teacher.cost)}</strong>
                 </p>
                 <a target="_blank" rel="noopener noreferrer" onClick={createNewConnection} href={`https://wa.me/${teacher.user.whatsapp}`}>
                     <img src={whatsappIcon} alt="Whatsapp"/>

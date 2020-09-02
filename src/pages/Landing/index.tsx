@@ -31,38 +31,49 @@ function Landing() {
 
     return (
         <div id="page-landing">
-            <div id="page-landing-header" className="container">
-                <Link to="/user-info" className="user-info">
-                    <img src={user && user.avatar ? user.avatar : studyIcon} alt={user?.name} className="user-icon"/>
-                    {user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
-                </Link>
-                
-                <img src={logoutImg} onClick={handleLogout} alt="Sair" className="logout-button"/>
+            <div id="page-landing-top">
+                <div className="page-landing-header">
+                    <Link to="/user-info" className="user-info">
+                        <img src={user && user.avatar ? user.avatar : studyIcon} alt={user?.name} className="user-icon"/>
+                        {user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
+                    </Link>
+                    
+                    <img src={logoutImg} onClick={handleLogout} alt="Sair" className="logout-button"/>
+                </div>
+
+                <div className="logo-content-container">
+                    <div className="logo-container">
+                        <img src={logoImg} alt="Proffy"/>
+                        <h2>Sua plataforma de estudos online.</h2>
+                    </div>
+
+                    <div className="hero-image-container">
+                        <img src={landingImg} alt="Plataforma de estudos" className="hero-image"/>
+                    </div>
+                </div>
             </div>
 
-            <div id="page-landing-content" className="container">
-                <div id="div" className="logo-container">
-                    <img src={logoImg} alt="Proffy"/>
-                    <h2>Sua plataforma de estudos online.</h2>
+            <div id="page-landing-content">
+                <div className="bottom-container">
+                    <p>Seja bem-vindo.<br/>
+                    <b>O que deseja fazer?</b></p>
+
+                    <span className="total-connections">
+                        Total de {totalConnections} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
+                    </span>
+
+                    <div className="buttons-container">
+                        <Link to="/study" className="study">
+                            <img src={studyIcon} alt="Estudar"/>
+                            Estudar
+                        </Link>
+
+                        <Link to="/give-classes" className="give-classes">
+                            <img src={giveClassesIcon} alt="Dar aulas"/>
+                            Dar aulas
+                        </Link>
+                    </div>
                 </div>
-
-                <img src={landingImg} alt="Plataforma de estudos" className="hero-image"/>
-
-                <div className="buttons-container">
-                    <Link to="/study" className="study">
-                        <img src={studyIcon} alt="Estudar"/>
-                        Estudar
-                    </Link>
-
-                    <Link to="/give-classes" className="give-classes">
-                        <img src={giveClassesIcon} alt="Dar aulas"/>
-                        Dar aulas
-                    </Link>
-                </div>
-
-                <span className="total-connections">
-                    Total de {totalConnections} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
-                </span>
             </div>
         </div>
     )

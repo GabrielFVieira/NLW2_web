@@ -2,22 +2,31 @@
     width: 100vw;
     height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
     color: var(--color-text-in-primary);
-    background: var(--color-primary);
 }
 
-#page-landing-header {
-    width: 90vw;
-    position: absolute;
-    top: 0;
+#page-landing-top {
+    width: 100vw;
+    height: 60%;
+    min-height: 450px;
+
+    background: var(--color-primary);
+
+    align-items: center;
+    justify-content: center;
     display: flex;
+    flex-direction: column;
+
+    padding-top: 1.5rem;
+}
+
+.page-landing-header {
+    width: 90vw;
+    height: 10%;
+    display: flex;
+    margin: auto;
     justify-content: space-between;
-    margin-top: 2rem;
+    align-items: center;
 }
 
 .user-info {
@@ -46,17 +55,21 @@
     cursor: pointer;
 }
 
-.logo-container img {
-    height: 10rem;
-}
-
-.hero-image {
+.logo-content-container {
     width: 100%;
+    height: 90%;
+
+    display: flex;
+    flex-flow: column;
 }
 
 .logo-container {
     text-align: center;
-    margin-bottom: 3.2rem;
+    margin: 1.5rem 0;
+}
+
+.logo-container img {
+    height: 10rem;
 }
 
 .logo-container h2 {
@@ -66,7 +79,63 @@
     margin-top: 0.8rem;
 }
 
+.hero-image-container {
+    overflow: hidden;
+    flex: 1 1 auto;
+    margin-bottom: 2.5rem;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+}
+
+#page-landing-content {
+    width: 100vw;
+    height: 40%;
+    min-height: 280px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-box-footer);
+}
+
+.bottom-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bottom-container p {
+    margin-top: 1.2rem;
+    font: 500 2.3rem Poppins;
+    text-align: center;
+    color: var(--color-text-base);
+}
+
+.total-connections {
+    font-size: 1.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1.2rem;
+    color: var(--color-text-complement);
+}
+
+.total-connections img {
+    margin-left: 0.8rem;
+}
+
 .buttons-container {
+    width: 90%;
     display: flex;
     justify-content: center;
     margin: 3.2rem 0;
@@ -87,6 +156,8 @@
     color: var(--color-button-text);
 
     transition: background-color 0.2s;
+
+    padding: 1.2rem;
 }
 
 .buttons-container a + a {
@@ -118,61 +189,64 @@
 }
 
 .buttons-container a img {
-    margin-right: 2.4rem;
+    margin-right: 1.6rem;
 }
 
-.total-connections {
-    font-size: 1.4rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.total-connections img {
-    margin-left: 0.8rem;
-}
-
-@media (min-width: 1100px) {
-    #page-landing-content {
-        max-width: 1100px;
-
-        display: grid;
-        grid-template-rows: 350px 1fr;
-        grid-template-columns: 2fr 1fr 1fr;
-        grid-template-areas: 
-            "logo hero hero"
-            "buttons buttons total"
-        ;
+@media (min-width: 1000px) {
+    .page-landing-header {
+        max-width: 1200px;
     }
 
-    #page-landing-header {
-        max-width: 1100px;
-        margin-top: 2.5rem;
+    .logo-content-container {
+        padding: 0 5rem;
+        max-width: 1200px;
+        flex-flow: row;
+        justify-content: space-between;
+    }
+
+    .page-landing-header {
+        grid-area: header;
     }
 
     .logo-container {
-        grid-area: logo;
         align-self: center;
         text-align: left;
         margin: 0;
-    }
-
-    .logo-container h2 {
-        text-align: initial;
-        font-size: 3.6rem;
     }
 
     .logo-container img {
         height: 100%;
     }
 
-    .hero-image {
-        grid-area: hero;
-        justify-self: end;
+    .logo-container h2 {
+        text-align: initial;
+        font-size: 3.6rem;
+        max-width: 400px;
+    }
+
+    .hero-image-container {
+        max-width: 600px;
+    }
+
+    .bottom-container {
+        padding: 0 5rem;
+        display: grid;
+        max-width: 1200px;
+        align-items: center;
+        grid-template-rows: 1fr;
+        grid-template-columns: 2fr 1fr 3fr;
+        grid-template-areas: 
+            "welcome total buttons"
+        ;
+    }
+
+    .bottom-container p {
+        grid-area: welcome;
+        text-align: left;
     }
 
     .buttons-container {
+        justify-self: center;
         grid-area: buttons;
         justify-content: flex-start;
     }
@@ -181,8 +255,13 @@
         font-size: 2.4rem;
     }
 
+    .buttons-container a img {
+        margin-right: 2.6rem;
+    }
+
     .total-connections {
         grid-area: total;
+        text-align: right;
         justify-self: end;
     }
 }

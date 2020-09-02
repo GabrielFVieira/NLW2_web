@@ -5,6 +5,8 @@ import TeacherItem, { TeacherClasses } from '../../components/TeacherItem';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 
+import smileIcon from '../../assets/images/icons/smile.svg';
+
 import api from '../../services/api';
 
 import './styles.css';
@@ -15,6 +17,7 @@ interface SubjectItem {
 }
 
 function TeacherList() {
+    const [teacherCount, setTeacherCount] = useState(0);
     const [teachers, setTeachers] = useState([]);
     const [subjects, setSubjects] = useState([]);
 
@@ -25,6 +28,7 @@ function TeacherList() {
     useEffect(() => {
         api.get('classes').then(response => {
             setTeachers(response.data);
+            setTeacherCount(response.data.length)
         })
 
         api.get('subjects').then(response => {
@@ -52,7 +56,15 @@ function TeacherList() {
 
     return (
         <div id="page-teacher-list" className="container" >
-            <PageHeader pageName="Estudar" title="Estes são os proffys disponíveis.">
+            <PageHeader 
+                pageName="Estudar"
+                title="Estes são os proffys disponíveis."
+                rightContent={{
+                    image: smileIcon,
+                    imageAlt: "Sorriso", 
+                    text: `Nós temos ${teacherCount} professores.`
+                }}
+            >
                 <form id="search-teachers" onSubmit={searchTeacher}>
                     <Select 
                         name="subject" 

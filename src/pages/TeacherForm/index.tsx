@@ -8,6 +8,7 @@ import Select from '../../components/Select';
 
 import warningIcon from '../../assets/images/icons/warning.svg';
 import removeIcon from '../../assets/images/icons/remove.svg';
+import rocketIcon from '../../assets/images/icons/rocket.svg';
 
 import api from '../../services/api';
 
@@ -78,6 +79,11 @@ function TeacherForm() {
                 pageName="Dar aulas"
                 title="Que incrível que você quer dar aulas."
                 description="O primeiro passo é preencher esse formulário de inscrição"
+                rightContent={{
+                    image: rocketIcon,
+                    imageAlt: "Foguete", 
+                    text: "Preparare-se!\nVai ser o máximo."
+                }}
             />
 
             <main>
