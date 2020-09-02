@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import logoIcon from '../../assets/images/logo.svg';
 import backIcon from '../../assets/images/icons/back.svg';
@@ -24,7 +24,7 @@ const PageHeader: React.FC  <PageHeaderProps> = (props) => {
     return (
         <header className="page-header">
             <Helmet>
-                <title>{`Proffy - ${props.pageName}`}</title>
+                <title>{props.pageName}</title>
                 <meta name="theme-color" content="#774DD6" />
             </Helmet>
 

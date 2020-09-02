@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import {Link} from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import { useAuth } from '../../contexts/auth';
 
@@ -30,6 +31,8 @@ function Login() {
 
     return (
         <div id="page-login">
+            <Helmet title="Login"/>
+
             <div id="page-login-logo-content" className="login-container">
                 <div className="page-logo-container">
                     <img src={logoImg} alt="Proffy"/>

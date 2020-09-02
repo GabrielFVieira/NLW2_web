@@ -1,0 +1,11 @@
+.schedule-bar {
+    display: flex;
+    align-items: stretch;
+    /* justify-content: space-between; */
+    flex-direction: row;
+    padding: 0 3.2rem;
+    margin-top: 2rem;
+    height: min-content;
+
+    flex-wrap: wrap;
+}

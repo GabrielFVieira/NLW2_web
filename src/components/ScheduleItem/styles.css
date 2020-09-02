@@ -1,0 +1,33 @@
+.schedule-item-box {
+    background: #FAFAFC;
+    border: 1px solid #E6E6F0;
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    overflow: hidden;
+
+    margin: 0.2rem;
+
+    width: 12.7rem;
+}
+
+.schedule-item-container {
+    margin-bottom: 1.5rem;
+}
+
+.schedule-item-container + .schedule-item-container {
+    margin-bottom: 0;
+}
+
+.schedule-item-label {
+    font: 500 1.2rem Poppins;
+    color: var(--color-text-complement);
+}
+
+.schedule-item-value {
+    font: 700 1.6rem Archivo;
+    color: var(--color-text-base);
+}
+
+.schedule-item-value + .schedule-item-value {
+    margin-top: 0.5rem;
+}

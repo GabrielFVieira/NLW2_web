@@ -6,6 +6,7 @@ import { User } from '../../contexts/auth';
 import api from '../../services/api';
 
 import './styles.css';
+import ScheduleBar, { Schedule } from '../ScheduleBar';
 
 interface Subject {
     id: number,
@@ -16,6 +17,7 @@ export interface TeacherClasses {
     id: number,
     subject: Subject,
     cost: number,
+    schedules: Schedule[],
     description?: number,
     user: User
 }
@@ -51,6 +53,10 @@ const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
             </header>
 
             <p>{teacher.description}</p>
+            
+            <div className="teacher-item-schedules">
+                <ScheduleBar schedules={teacher.schedules}/>
+            </div>
 
             <footer>
                 <p>

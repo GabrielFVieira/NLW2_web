@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import LoginInput from '../../components/LoginInput';
 
@@ -34,6 +35,8 @@ function Register() {
 
     return (
         <div id="page-register">
+            <Helmet title="Cadastro"/>
+
             <div id="page-login-logo-content" className="login-container">
                 <div className="page-logo-container">
                     <img src={logoImg} alt="Proffy"/>

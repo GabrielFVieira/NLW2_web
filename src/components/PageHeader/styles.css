@@ -87,8 +87,8 @@
         align-items: flex-start;
     }
 
-    .header-content-top-left strong {
-        max-width: 450px;
+    .header-content-top-left {
+        max-width: 500px;
     }
 
     .header-content-top-right {
