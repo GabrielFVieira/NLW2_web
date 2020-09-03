@@ -1,6 +1,8 @@
 import React, { useState, FormEvent, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { maskAsCellphone } from '../../components/masks';
+
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
@@ -49,6 +51,8 @@ function TeacherForm() {
             ...schedules,
             { week_day: '', from: '', to: '' }
         ]);
+
+        console.log(user?.whatsapp);
     }
 
     function removeScheduleItem(scheduleIndex: number) {
@@ -113,10 +117,10 @@ function TeacherForm() {
                                 <h2 className="proffy-name">{`${user?.name} ${user?.surname}`}</h2>
                             </div>
                             
-                            <Input name="whatsapp" label="Whatsapp" type="text" data-mask="+00 (00) 00000-0000" data-mask-selectonfocus="true" value={user?.whatsapp} readOnly={false} onChange={ (e) => {} }/>
+                            <Input name="whatsapp" label="Whatsapp" mask="cellphone" value={maskAsCellphone(user?.whatsapp)} disabled/>
                         </div>
 
-                        <Textarea maxLength={300} name="description" required value={description} label="Descrição da aula" onChange={ (e) => {setDescription(e.target.value)} } />
+                        <Textarea maxLength={1000} name="description" required value={description} label="Descrição da aula" onChange={ (e) => {setDescription(e.target.value)} } />
                     </fieldset>
 
                     <fieldset>

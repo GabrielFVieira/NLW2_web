@@ -37,6 +37,12 @@
 .teacher-info .input-block {
     margin-top: 1.2rem;
     width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.teacher-info .input-block input {
+    background-color: var(--color-input-disabled);
 }
 
 .teacher-info div img {
@@ -49,11 +55,6 @@
 .teacher-info div h2 {
     font: 700 2.4rem Archivo;
     color: var(--color-text-title);
-}
-
-.teacher-info .input-block {
-    flex-direction: column;
-    align-items: flex-start;
 }
 
 #page-teacher-form main fieldset {
