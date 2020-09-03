@@ -1,4 +1,4 @@
-import React, { useState, FormEvent} from 'react';
+import React, { useState, FormEvent, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
@@ -13,37 +13,52 @@ import rocketIcon from '../../assets/images/icons/rocket.svg';
 import api from '../../services/api';
 
 import './styles.css';
+import { useAuth } from '../../contexts/auth';
+
+interface SubjectItem {
+    id: number,
+    name: string
+}
 
 function TeacherForm() {
     const history = useHistory();
 
-    const [name, setName] = useState('');
-    const [avatar, setAvatar] = useState('');
-    const [whatsapp, setWhatsapp] = useState('');
-    const [bio, setBio] = useState('');
+    const { user } = useAuth();
+    const [subjects, setSubjects] = useState([]);
     
-    const [subject, setSubject] = useState('');
+    const [description, setDescription] = useState('');
+    const [subject, setSubject] = useState(0);
     const [cost, setCost] = useState('');
 
-    const [scheduleItems, setScheduleItems] = useState([
+    const [schedules, setSchedules] = useState([
         { week_day: '', from: '', to: '' }
     ]);
 
+    useEffect(() => {
+        api.get('subjects').then(response => {
+            const subjectsOptions = response.data.map((subjectItem:SubjectItem) => {
+                return { value: subjectItem.id, label: subjectItem.name };
+            })
+
+            setSubjects(subjectsOptions);
+        })
+    }, []);
+
     function addNewScheduleItem() {
-        setScheduleItems([
-            ...scheduleItems,
+        setSchedules([
+            ...schedules,
             { week_day: '', from: '', to: '' }
         ]);
     }
 
     function removeScheduleItem(scheduleIndex: number) {
-        const scheduleItemsOriginal = [...scheduleItems]
+        const scheduleItemsOriginal = [...schedules]
         scheduleItemsOriginal.splice(scheduleIndex, 1)
-        setScheduleItems(scheduleItemsOriginal);
+        setSchedules(scheduleItemsOriginal);
     }
 
     function setScheduleItemValue(position: number, field: string, value: string) {
-        const updateScheduleItems = scheduleItems.map((scheduleItem, index) => {
+        const updateScheduleItems = schedules.map((scheduleItem, index) => {
             if(index === position) {
                 return {...scheduleItem, [field]: value};
             }
@@ -51,20 +66,22 @@ function TeacherForm() {
             return scheduleItem;
         });
 
-        setScheduleItems(updateScheduleItems);
+        setSchedules(updateScheduleItems);
     }
 
     function handleCreateClass(e: FormEvent) {
         e.preventDefault();
 
+        if(!schedules || schedules.length === 0) {
+            alert('Cadestre ao menos um horário!')
+            return;
+        }
+
         api.post('classes', {
-            name,
-            avatar,
-            whatsapp,
-            bio,
-            subject,
+            description,
+            subject: { id: subject },
             cost: Number(cost),
-            schedule: scheduleItems
+            schedules
         }).then(() => {
             alert('Cadastro realizado com sucesso!')
             history.push('/');
@@ -89,12 +106,17 @@ function TeacherForm() {
             <main>
                 <form onSubmit={handleCreateClass}>
                     <fieldset>
-                        <legend>Seus dados</legend>
+                        <legend>Seus dados</legend>            
+                        <div className="teacher-info">
+                            <div>
+                                <img src={user && user.avatar ? user.avatar : ''} alt={user?.name} className="user-icon"/>
+                                <h2 className="proffy-name">{`${user?.name} ${user?.surname}`}</h2>
+                            </div>
+                            
+                            <Input name="whatsapp" label="Whatsapp" type="text" data-mask="+00 (00) 00000-0000" data-mask-selectonfocus="true" value={user?.whatsapp} readOnly={false} onChange={ (e) => {} }/>
+                        </div>
 
-                        <Input name="name" label="Nome completo" value={name} onChange={ (e) => {setName(e.target.value)} } />
-                        <Input name="avatar" label="Avatar" value={avatar} onChange={ (e) => {setAvatar(e.target.value)} } />
-                        <Input name="whatsapp" label="Whatsapp" value={whatsapp} onChange={ (e) => {setWhatsapp(e.target.value)} } />
-                        <Textarea maxLength={1000} name="bio" value={bio} label="Biografia" onChange={ (e) => {setBio(e.target.value)} } />
+                        <Textarea maxLength={300} name="description" required value={description} label="Descrição da aula" onChange={ (e) => {setDescription(e.target.value)} } />
                     </fieldset>
 
                     <fieldset>
@@ -104,15 +126,11 @@ function TeacherForm() {
                             name="subject" 
                             label="Matéria"
                             value={subject}
-                            options={[
-                                { value: 'artes', label: "Artes" },
-                                { value: 'matematica', label: "Matemática" },
-                                { value: 'portugues', label: "Português" },
-                                { value: 'geografia', label: "Geografia" }
-                            ]}
-                            onChange={ (e) => {setSubject(e.target.value)} }
+                            options={subjects}
+                            required
+                            onChange={ (e) => {setSubject(Number(e.target.value))} }
                         />
-                        <Input name="cost" label="Custo da sua hora por aula" value={cost} onChange={ (e) => {setCost(e.target.value)} }/>
+                        <Input name="cost" label="Custo da sua hora por aula" type="number" min="0" required value={cost} onChange={ (e) => {setCost(e.target.value)} }/>
                     </fieldset>
 
                     <fieldset>
@@ -121,13 +139,14 @@ function TeacherForm() {
                             <button type="button" onClick={addNewScheduleItem}>+ Novo horário</button>
                         </legend>
                         
-                        {scheduleItems.map((scheduleItem, index) => {
+                        {schedules.map((scheduleItem, index) => {
                             return (
                                 <div key={index} className="schedule-item">
                                     <Select 
                                         name="week-day" 
                                         label="Dia da semana"
                                         value={scheduleItem.week_day}
+                                        required
                                         onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
                                         options={[
                                             { value: '0', label: "Domingo" },
@@ -139,8 +158,8 @@ function TeacherForm() {
                                             { value: '6', label: "Sábado" }
                                         ]}
                                     />
-                                    <Input name="from" label="Das" type="time" value={scheduleItem.from} onChange={e => setScheduleItemValue(index, 'from', e.target.value)}/>
-                                    <Input name="to" label="Até" type="time" value={scheduleItem.to} onChange={e => setScheduleItemValue(index, 'to', e.target.value)}/>
+                                    <Input name="from" label="Das" type="time" required value={scheduleItem.from} onChange={e => setScheduleItemValue(index, 'from', e.target.value)}/>
+                                    <Input name="to" label="Até" type="time" required value={scheduleItem.to} onChange={e => setScheduleItemValue(index, 'to', e.target.value)}/>
                                     <button type="button" onClick={() => removeScheduleItem(index)}>
                                         <img src={removeIcon} alt="Remover"/>
                                     </button>

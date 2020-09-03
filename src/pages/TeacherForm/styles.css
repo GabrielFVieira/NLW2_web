@@ -18,6 +18,44 @@
     overflow: hidden;
 }
 
+.teacher-info {
+    margin-bottom: 2.6rem;
+    flex-direction: column;
+}
+
+.teacher-info, .teacher-info div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.teacher-info div {
+    flex-direction: row;
+    width: 100%;
+}
+
+.teacher-info .input-block {
+    margin-top: 1.2rem;
+    width: 100%;
+}
+
+.teacher-info div img {
+    margin-right: 2.4rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.teacher-info div h2 {
+    font: 700 2.4rem Archivo;
+    color: var(--color-text-title);
+}
+
+.teacher-info .input-block {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 #page-teacher-form main fieldset {
     border: 0;
     padding: 0 2.4rem;
@@ -173,5 +211,14 @@
 
     #page-teacher-form main .schedule-item button {
         width: 8rem;
+    }
+
+    .teacher-info {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .teacher-info .input-block {
+        margin-top: 0;
     }
 }

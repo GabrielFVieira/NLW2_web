@@ -7,7 +7,8 @@
 }
 
 .input-block label {
-    font-size: 1.4rem;
+    font: 500 1.6rem Poppins;
+    color: var(--color-text-complement);
 }
 
 .input-block input {

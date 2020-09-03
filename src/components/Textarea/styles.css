@@ -6,8 +6,21 @@
     margin-top: 1.4rem;
 }
 
-.textarea-block label {
-    font-size: 1.4rem;
+.textarea-block div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.textarea-block div label {
+    font: 500 1.6rem Poppins;
+    color: var(--color-text-complement);
+    margin-right: 1.5rem;
+}
+
+.textarea-block div p {
+    font: 500 1.4rem Poppins;
+    color: #C1BCCC;
 }
 
 .textarea-block textarea {

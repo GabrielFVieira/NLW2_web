@@ -105,6 +105,12 @@ function TeacherList() {
                         <p>Nenhum professor encontrado com sua pesquisa.</p>
                     </div>
                 }
+
+                {teachers.length > 0 && 
+                    <div className="endingMessage">
+                        <p>Estes são todos os resultados.</p>
+                    </div>
+                }
             </main>
         </div>
     )
