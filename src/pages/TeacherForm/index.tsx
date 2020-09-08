@@ -146,11 +146,14 @@ function TeacherForm() {
                                     <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day} required
                                     onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)} options={weekDays}/>
 
-                                    <Input name="from" label="Das" type="time" required value={scheduleItem.from_formated} 
-                                    onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}/>
+                                    <div className="hour-container">
+                                        <Input name="from" label="Das" type="time" required value={scheduleItem.from_formated} 
+                                        onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}/>
 
-                                    <Input name="to" label="Até" type="time" required value={scheduleItem.to_formated} 
-                                    onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}/>
+                                        <Input name="to" label="Até" type="time" required value={scheduleItem.to_formated} 
+                                        onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}/>
+                                    </div>
+                                    
                                     <button type="button" onClick={() => removeScheduleItem(index)} disabled={schedules.length <= 1}>
                                         <img src={removeIcon} alt="Remover"/>
                                     </button>

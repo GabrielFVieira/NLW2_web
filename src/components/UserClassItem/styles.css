@@ -37,22 +37,22 @@
 .user-class-item .user-class-item-container .input-block,
 .user-class-item .input-block,
 .user-class-item .select-block,
-.hour-container {
+.user-class-item .schedule-item .hour-container {
     width: 100%;
 }
 
-.hour-container {
+.schedule-item .hour-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 1.4rem;
 }
 
-.hour-container .input-block {
+.user-class-item .schedule-item .hour-container .input-block {
     margin-top: 0;
 }
 
-.hour-container .input-block + .input-block {
+.user-class-item .schedule-item .hour-container .input-block + .input-block {
     margin-left: 1.6rem;
 }
 
@@ -164,7 +164,7 @@
         margin-top: 0;
     }
 
-    .hour-container {
+    .user-class-item .schedule-item .hour-container {
         margin-top: 0;
     }
 

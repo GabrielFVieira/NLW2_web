@@ -172,6 +172,23 @@
     cursor: default;
 }
 
+#page-teacher-form main form fieldset .schedule-item .hour-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+#page-teacher-form main form fieldset .schedule-item .hour-container .input-block {
+    width: 100%;
+    margin-top: 0;
+}
+
+#page-teacher-form main form fieldset .schedule-item .hour-container .input-block + .input-block {
+    margin-left: 1.6rem;
+}
+
 @media(min-width: 700px) {
     #page-teacher-form {
         max-width: 100vw;
@@ -207,8 +224,7 @@
 
     #page-teacher-form main .schedule-item {
         display: grid;
-        grid-template-columns: 6fr 3fr 3fr 1fr;
-        /* grid-template-columns: 2fr 1fr 1fr; */
+        grid-template-columns: 6fr 6fr 1fr;
         column-gap: 1.6rem;
     }
 
@@ -242,6 +258,10 @@
     }
     
     .teacher-info .input-block {
+        margin-top: 0;
+    }
+
+    #page-teacher-form main form fieldset .schedule-item .hour-container {
         margin-top: 0;
     }
 }
