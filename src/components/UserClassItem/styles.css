@@ -21,10 +21,6 @@
     padding: 0 2rem;
 }
 
-.user-class-item .user-class-item-container .disabled-input {
-    background-color: var(--color-input-disabled);
-}
-
 .user-class-item .user-class-item-container + .textarea-block {
     margin-top: 1.4rem;
 }

@@ -82,7 +82,7 @@ const UserClassItem:React.FC <UserClassItemProps> = ({ classe }) => {
     return (
         <div className="user-class-item">
             <div className="user-class-item-container">
-                <Input className="disabled-input" name="subject" label="Matéria" value={subject} disabled/>
+                <Input name="subject" label="Matéria" value={subject} disabled/>
                 <Input name="cost" label="Custo da sua hora por aula" mask="R$99,99" pattern={currencyPattern.pattern} 
                     title={currencyPattern.title} required value={cost} onChange={ (e) => {setCost(e.target.value)} }/>
             </div>

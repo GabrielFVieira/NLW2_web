@@ -60,7 +60,6 @@ function UserPerfil() {
             api.post('user-update', {
                 name,
                 surname,
-                email,
                 bio,
                 whatsapp: removeSpecialCharacters(whatsapp)
             }).then(() => {
@@ -93,7 +92,7 @@ function UserPerfil() {
                         </div>
 
                         <div id="contact-inputs" className="user-info-input">
-                            <Input name="email" type="email" label="E-mail" required value={email} onChange={ (e) => {setEmail(e.target.value)} } />
+                            <Input name="email" type="email" label="E-mail" disabled value={email} />
                             <Input name="whatsapp" label="Whatsapp" mask="+99 (99) 99999-9999" required pattern={phonePattern.pattern} title={phonePattern.title} value={whatsapp}onChange={ (e) => {setWhatsapp(e.target.value)} } />
                         </div>
 
