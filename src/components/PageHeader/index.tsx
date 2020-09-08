@@ -14,7 +14,7 @@ interface RightContentProps {
 }
 
 interface PageHeaderProps {
-    title: string;
+    title?: string;
     pageName: string;
     description?: string;
     rightContent?: RightContentProps;

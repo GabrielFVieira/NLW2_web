@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 
 import PageHeader from '../../components/PageHeader';
-import TeacherItem, { TeacherClasses } from '../../components/TeacherItem';
+import TeacherItem, { Classes } from '../../components/TeacherItem';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 
@@ -73,10 +73,8 @@ function TeacherList() {
                         options={subjects}
                         onChange={ (e) => {setSubject(e.target.value)} }
                     />
-                    <Select 
-                        name="week-day" 
-                        label="Dia da semana"
-                        value={week_day}
+                    <Select name="week-day" label="Dia da semana" value={week_day}
+                        onChange={ (e) => {setWeekDay(e.target.value)} }
                         options={[
                             { value: '0', label: "Domingo" },
                             { value: '1', label: "Segunda-Feira" },
@@ -86,7 +84,6 @@ function TeacherList() {
                             { value: '5', label: "Sexta-Feira" },
                             { value: '6', label: "Sábado" }
                         ]}
-                        onChange={ (e) => {setWeekDay(e.target.value)} }
                     />
                     <Input type="time" name="time" label="Hora" value={time} onChange={ (e) => {setTime(e.target.value)} }/>
                     
@@ -98,7 +95,7 @@ function TeacherList() {
 
             <main>
                 {teachers.length > 0 ? 
-                    teachers.map((teacher:TeacherClasses) => {
+                    teachers.map((teacher:Classes) => {
                         return <TeacherItem key={teacher.id} teacher={teacher} />;
                     }) :
                     <div className="emptyMessage">

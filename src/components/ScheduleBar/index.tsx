@@ -4,7 +4,7 @@ import ScheduleItem from '../ScheduleItem';
 import './styles.css';
 
 export interface Schedule {
-    id: number,
+    id?: number,
     to_formated: string,
     from_formated: string,
     week_day: number,

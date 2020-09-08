@@ -15,6 +15,7 @@
 .teacher-item header img {
     width: 8rem;
     height: 8rem;
+    border: 2px solid var(--color-line-in-white);
     border-radius: 50%;
 }
 

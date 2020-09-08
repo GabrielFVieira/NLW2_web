@@ -9,6 +9,7 @@ import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 
 import LoginInput from '../../components/LoginInput';
 
+import { passwordPattern } from '../../assets/utils/patterns';
 import './styles.css';
 
 function Login() {
@@ -47,7 +48,7 @@ function Login() {
                             <legend>Fazer login</legend>
 
                             <LoginInput name="email" placeholder="E-mail" type="email" required={true} value={email} onChange={ (e) => {setEmail(e.target.value)} } />
-                            <LoginInput name="senha" placeholder="Senha" type="password" minLength={8} required={true} value={password} onChange={ (e) => {setPassword(e.target.value)} } />
+                            <LoginInput name="senha" placeholder="Senha" type="password" pattern={passwordPattern.pattern} title={passwordPattern.title} required={true} value={password} onChange={ (e) => {setPassword(e.target.value)} } />
                         </fieldset>
                     
                         <footer>

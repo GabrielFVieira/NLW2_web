@@ -1,0 +1,212 @@
+#user-form {
+    width: 100vw;
+    height: 100vh;
+}
+
+#user-form .page-header .header-content {
+    margin-bottom: 6.4rem;
+}
+
+#user-form main {
+    background: var(--color-box-base);
+    width: 100%;
+    max-width: 100rem;
+    border-radius: 0.8rem;
+    margin: -3.2rem auto;
+    padding-bottom: 1.6rem;
+    padding-top: 6.4rem;
+    overflow: hidden;
+}
+
+#user-form .page-header {
+    height: min-content;
+}
+
+#user-form .page-header .user-header {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background: url('../../assets/images/header-background.svg') no-repeat center;
+    background-size: cover;
+    background-origin: content-box;
+}
+
+.user-header .user-icon {
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+}
+
+.user-header h2 {
+    font: 700 3rem Archivo;
+    color: var(--color-title-in-primary);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#user-form main fieldset {
+    border: 0;
+    padding: 0 2.4rem;
+}
+
+#user-form main fieldset + fieldset {
+    margin-top: 6.4rem;
+}
+
+#user-form main fieldset legend {
+    font: 700 2.4rem Archivo;
+    color: var(--color-text-title);
+    margin-bottom: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--color-line-in-white);
+}
+
+#user-form main fieldset legend button {
+    background: none;
+    border: 0;
+    color: var(--color-primary);
+    font: 700 1.6rem Archivo;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#user-form main fieldset legend button:hover {
+    color: var(--color-primary-dark);
+}
+
+.user-info-input + .user-info-input,
+.user-info-input + .textarea-block {
+    margin-top: 1.4rem;
+}
+
+#user-form main fieldset .input-block + .textarea-block,
+#user-form main fieldset .select-block + .input-block {
+    margin-top: 2.4rem;
+}
+
+#user-form main label {
+    color: var(--color-text-complement)
+}
+
+#user-form main footer {
+    padding: 4rem 2.4rem;
+    background: var(--color-box-footer);
+    border-top: 1px solid var(--color-line-in-white);
+    margin-top: 6.4rem;
+}
+
+#user-form main footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    color: var(--color-text-complement);
+}
+
+#user-form main footer p img {
+    margin-right: 2rem;
+}
+
+#user-form main footer button {
+    width: 100%;
+    height: 5.6rem;
+    background: var(--color-secundary);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 3.2rem;
+}
+
+#user-form main footer button:hover {
+    background: var(--color-secundary-dark);
+}
+
+@media(min-width: 700px) {
+    #user-form {
+        max-width: 100vw;
+    }
+
+    #user-form .page-header .header-content {
+        margin-bottom: 0;
+    }
+
+    .user-header {
+        padding-top: 2rem;
+    }
+
+    .user-header .user-icon {
+        margin-top: 3rem;
+    }
+
+    .user-header h2 {
+        margin-bottom: 3rem;
+    }
+
+    #user-form main {
+        margin-bottom: 3.2rem;
+    }
+
+    #user-form main fieldset {
+        padding:  0 6.4rem;
+    }
+
+    .user-info-input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #personal-data-inputs .input-block {
+        width: 48%;
+    }
+
+    #personal-data-inputs .input-block + .input-block {
+        margin-top: 0;
+    }
+
+    #contact-inputs .input-block {
+        width: 62%;
+    }
+
+    #contact-inputs .input-block + .input-block {
+        width: 34%;
+        margin-top: 0;
+    }
+
+    #user-form main footer {
+        padding:  4.0rem 6.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #user-form main footer p {
+        justify-content: space-between;
+    }
+
+    #user-form main footer button {
+        width: 20rem;
+        margin-top: 0;
+    }
+
+    #user-form main .schedule-item button {
+        width: 8rem;
+    }
+}

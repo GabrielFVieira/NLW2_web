@@ -5,6 +5,7 @@ import logoImg from '../../assets/images/logo.svg';
 import logoutImg from '../../assets/images/icons/logout.svg';
 import landingImg from '../../assets/images/landing.svg';
 
+import userIcon from '../../assets/images/icons/user.svg';
 import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
@@ -34,7 +35,7 @@ function Landing() {
             <div id="page-landing-top">
                 <div className="page-landing-header">
                     <Link to="/user-info" className="user-info">
-                        <img src={user && user.avatar ? user.avatar : studyIcon} alt={user?.name} className="user-icon"/>
+                        <img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon"/>
                         {user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
                     </Link>
                     

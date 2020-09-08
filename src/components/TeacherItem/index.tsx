@@ -1,5 +1,6 @@
 import React from 'react';
 
+import userIcon from '../../assets/images/icons/user.svg'
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
 import { User } from '../../contexts/auth';
@@ -8,22 +9,22 @@ import api from '../../services/api';
 import './styles.css';
 import ScheduleBar, { Schedule } from '../ScheduleBar';
 
-interface Subject {
+export interface Subject {
     id: number,
     name: string
 }
 
-export interface TeacherClasses {
+export interface Classes {
     id: number,
     subject: Subject,
     cost: number,
     schedules: Schedule[],
-    description?: number,
+    description?: string,
     user: User
 }
 
 interface ClassItemProps {
-    teacher: TeacherClasses;
+    teacher: Classes;
 }
 
 const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
@@ -45,7 +46,7 @@ const TeacherItem:React.FC <ClassItemProps> = ({ teacher }) => {
     return (
         <article className="teacher-item">
             <header>
-                <img src={teacher.user.avatar} alt={teacher.user.name}/>
+                <img src={teacher.user.avatar ? teacher.user.avatar : userIcon} alt={teacher.user.name}/>
                 <div>
                     <strong>{`${teacher.user.name} ${teacher.user.surname}`}</strong>
                     <span>{teacher.subject.name}</span>
