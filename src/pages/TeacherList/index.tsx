@@ -7,8 +7,9 @@ import Select from '../../components/Select';
 
 import smileIcon from '../../assets/images/icons/smile.svg';
 
-import api from '../../services/api';
+import weekDays from '../../assets/utils/weekDays';
 
+import api from '../../services/api';
 import './styles.css';
 
 interface SubjectItem {
@@ -74,17 +75,8 @@ function TeacherList() {
                         onChange={ (e) => {setSubject(e.target.value)} }
                     />
                     <Select name="week-day" label="Dia da semana" value={week_day}
-                        onChange={ (e) => {setWeekDay(e.target.value)} }
-                        options={[
-                            { value: '0', label: "Domingo" },
-                            { value: '1', label: "Segunda-Feira" },
-                            { value: '2', label: "Terça-Feira" },
-                            { value: '3', label: "Quarta-Feira" },
-                            { value: '4', label: "Quinta-Feira" },
-                            { value: '5', label: "Sexta-Feira" },
-                            { value: '6', label: "Sábado" }
-                        ]}
-                    />
+                    onChange={ (e) => {setWeekDay(e.target.value)} } options={weekDays}/>
+
                     <Input type="time" name="time" label="Hora" value={time} onChange={ (e) => {setTime(e.target.value)} }/>
                     
                     <button type="submit">

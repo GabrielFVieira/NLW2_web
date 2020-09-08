@@ -11,9 +11,9 @@ import UserClassItem, { UserClasses } from '../../components/UserClassItem';
 import userIcon from '../../assets/images/icons/user.svg';
 import warningIcon from '../../assets/images/icons/warning.svg';
 
-import api from '../../services/api';
-
 import { phonePattern } from '../../assets/utils/patterns';
+
+import api from '../../services/api';
 import './styles.css';
 
 interface SubjectItem {

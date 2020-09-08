@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import logoImg from '../../assets/images/logo.svg';
 import logoutImg from '../../assets/images/icons/logout.svg';
 import landingImg from '../../assets/images/landing.svg';
-
 import userIcon from '../../assets/images/icons/user.svg';
 import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassesIcon from '../../assets/images/icons/give-classes.svg';

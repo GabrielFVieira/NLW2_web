@@ -41,14 +41,14 @@
     width: 90%;
 }
 
-.emptyMessage,
+#page-teacher-list main .emptyMessage,
 .endingMessage {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.emptyMessage {
+#page-teacher-list main .emptyMessage {
     margin-top: 6.5rem;
 }
 
@@ -56,7 +56,7 @@
     margin-top: 3.5rem;
 }
 
-.emptyMessage p, 
+#page-teacher-list main .emptyMessage p, 
 .endingMessage p {
     text-align: center;
     max-width: 25rem;

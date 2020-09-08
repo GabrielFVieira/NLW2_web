@@ -5,18 +5,19 @@ import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
+import { currencyPattern } from '../../assets/utils/patterns';
+import { useAuth } from '../../contexts/auth';
+import { Schedule } from '../../components/ScheduleBar';
 
 import userIcon from '../../assets/images/icons/user.svg';
 import warningIcon from '../../assets/images/icons/warning.svg';
 import removeIcon from '../../assets/images/icons/remove.svg';
 import rocketIcon from '../../assets/images/icons/rocket.svg';
 
-import api from '../../services/api';
+import weekDays from '../../assets/utils/weekDays';
 
-import { currencyPattern } from '../../assets/utils/patterns';
+import api from '../../services/api';
 import './styles.css';
-import { useAuth } from '../../contexts/auth';
-import { Schedule } from '../../components/ScheduleBar';
 
 interface SubjectItem {
     id: number,
@@ -142,18 +143,9 @@ function TeacherForm() {
                         {schedules.map((scheduleItem, index) => {
                             return (
                                 <div key={index} className="schedule-item">
-                                    <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day}
-                                    required onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
-                                        options={[
-                                            { value: '0', label: "Domingo" },
-                                            { value: '1', label: "Segunda-Feira" },
-                                            { value: '2', label: "Terça-Feira" },
-                                            { value: '3', label: "Quarta-Feira" },
-                                            { value: '4', label: "Quinta-Feira" },
-                                            { value: '5', label: "Sexta-Feira" },
-                                            { value: '6', label: "Sábado" }
-                                        ]}
-                                    />
+                                    <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day} required
+                                    onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)} options={weekDays}/>
+
                                     <Input name="from" label="Das" type="time" required value={scheduleItem.from_formated} 
                                     onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}/>
 

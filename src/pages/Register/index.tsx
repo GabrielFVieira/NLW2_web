@@ -8,8 +8,9 @@ import logoImg from '../../assets/images/logo.svg';
 import backImg from '../../assets/images/icons/back.svg';
 
 import { passwordPattern } from '../../assets/utils/patterns';
-import './styles.css';
+
 import api from '../../services/api';
+import './styles.css';
 
 function Register() {
     const history = useHistory();

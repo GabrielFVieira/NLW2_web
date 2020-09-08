@@ -1,13 +1,13 @@
 import React from 'react';
 
-import userIcon from '../../assets/images/icons/user.svg'
-import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
-
-import { User } from '../../contexts/auth';
-import api from '../../services/api';
-
-import './styles.css';
 import ScheduleBar, { Schedule } from '../ScheduleBar';
+import { User } from '../../contexts/auth';
+
+import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
+import userIcon from '../../assets/images/icons/user.svg'
+
+import api from '../../services/api';
+import './styles.css';
 
 export interface Subject {
     id: number,

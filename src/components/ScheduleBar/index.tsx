@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import ScheduleItem from '../ScheduleItem';
+import weekDays from '../../assets/utils/weekDays';
+
 import './styles.css';
 
 export interface Schedule {
@@ -15,7 +17,7 @@ interface ScheduleBarProps {
 }
 
 const ScheduleBar:React.FC <ScheduleBarProps> = ({ schedules }) => {
-    const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const days = weekDays.map(day => day.label.split('-')[0]);
     const [schedulesGrouped, setSchedulesGrouped] = useState(new Map());
     
     useEffect(groupSchedules, []);

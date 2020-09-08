@@ -2,14 +2,14 @@ import React, { useState, FormEvent } from 'react';
 import {Link} from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-import { useAuth } from '../../contexts/auth';
+import LoginInput from '../../components/LoginInput';
 
 import logoImg from '../../assets/images/logo.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 
-import LoginInput from '../../components/LoginInput';
-
 import { passwordPattern } from '../../assets/utils/patterns';
+
+import { useAuth } from '../../contexts/auth';
 import './styles.css';
 
 function Login() {

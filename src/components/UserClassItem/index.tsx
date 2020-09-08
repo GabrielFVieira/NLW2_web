@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import './styles.css';
 import { Schedule } from '../ScheduleBar';
 import { Subject } from '../TeacherItem';
-import { currencyPattern } from '../../assets/utils/patterns';
 import Textarea from '../Textarea';
+import Select from '../Select';
 import Input from '../Input';
 
+import { currencyPattern } from '../../assets/utils/patterns';
+import weekDays from '../../assets/utils/weekDays';
+
 import removeIcon from '../../assets/images/icons/remove.svg';
-import Select from '../Select';
+
+import './styles.css';
 
 export interface UserClasses {
     id: number,
@@ -95,18 +98,8 @@ const UserClassItem:React.FC <UserClassItemProps> = ({ classe }) => {
             {schedules.map((scheduleItem, index) => {
                 return (
                     <div key={index} className="schedule-item">
-                        <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day}
-                        required onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
-                            options={[
-                                { value: '0', label: "Domingo" },
-                                { value: '1', label: "Segunda-Feira" },
-                                { value: '2', label: "Terça-Feira" },
-                                { value: '3', label: "Quarta-Feira" },
-                                { value: '4', label: "Quinta-Feira" },
-                                { value: '5', label: "Sexta-Feira" },
-                                { value: '6', label: "Sábado" }
-                            ]}
-                        />
+                        <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day} required
+                        onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)} options={weekDays}/>
 
                         <div className="hour-container">
                             <Input name="from" label="Das" type="time" required value={scheduleItem.from_formated} 
