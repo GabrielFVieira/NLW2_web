@@ -1,268 +1,266 @@
 #page-landing {
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 
-    color: var(--color-text-in-primary);
+	color: var(--color-text-in-primary);
 }
 
 #page-landing-top {
-    width: 100vw;
-    height: 60%;
-    min-height: 450px;
+	width: 100vw;
+	height: 60%;
+	min-height: 450px;
 
-    background: var(--color-primary);
+	background: var(--color-primary);
 
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
 
-    padding-top: 1.5rem;
+	padding-top: 1.5rem;
 }
 
 .page-landing-header {
-    width: 90vw;
-    height: 10%;
-    display: flex;
-    margin: auto;
-    justify-content: space-between;
-    align-items: center;
+	width: 90vw;
+	height: 10%;
+	display: flex;
+	margin: auto;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .user-info {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    flex-direction: row;
-    font: 700 1.6rem Poppins;
-    color: var(--color-text-in-primary);
-    -webkit-tap-highlight-color: transparent;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	flex-direction: row;
+	font: 700 1.6rem Poppins;
+	color: var(--color-text-in-primary);
+	-webkit-tap-highlight-color: transparent;
 }
 
-.user-info .user-icon{
-    margin-right: 1.8rem;
-    width: 4rem;
-    height: 4rem;
-    border: 1px solid var(--color-line-in-white);
-    border-radius: 50%;
+.user-info .user-icon {
+	margin-right: 1.8rem;
+	width: 4rem;
+	height: 4rem;
+	border: 1px solid var(--color-line-in-white);
+	border-radius: 50%;
 }
 
 .logout-button {
-    -webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .logout-button:hover {
-    opacity: 0.7;
-    cursor: pointer;
+	opacity: 0.7;
+	cursor: pointer;
 }
 
 .logo-content-container {
-    width: 100%;
-    height: 90%;
+	width: 100%;
+	height: 90%;
 
-    display: flex;
-    flex-flow: column;
+	display: flex;
+	flex-flow: column;
 }
 
 .logo-container {
-    text-align: center;
-    margin: 1.5rem 0;
+	text-align: center;
+	margin: 1.5rem 0;
 }
 
 .logo-container img {
-    height: 10rem;
+	height: 10rem;
 }
 
 .logo-container h2 {
-    font-weight: 500;
-    font-size: 2.4rem;
-    line-height: 4.6rem;
-    margin-top: 0.8rem;
+	font-weight: 500;
+	font-size: 2.4rem;
+	line-height: 4.6rem;
+	margin-top: 0.8rem;
 }
 
 .hero-image-container {
-    overflow: hidden;
-    flex: 1 1 auto;
-    margin-bottom: 2.5rem;
+	overflow: hidden;
+	flex: 1 1 auto;
+	margin-bottom: 2.5rem;
 }
 
 .hero-image {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 #page-landing-content {
-    width: 100vw;
-    height: 40%;
-    min-height: 280px;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width: 100vw;
+	height: 40%;
+	min-height: 280px;
 
-    background: var(--color-box-footer);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: var(--color-box-footer);
 }
 
 .bottom-container {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .bottom-container p {
-    margin-top: 1.2rem;
-    font: 500 2.3rem Poppins;
-    text-align: center;
-    color: var(--color-text-base);
+	margin-top: 1.2rem;
+	font: 500 2.3rem Poppins;
+	text-align: center;
+	color: var(--color-text-base);
 }
 
 .total-connections {
-    font-size: 1.4rem;
+	font-size: 1.4rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    margin-top: 1.2rem;
-    color: var(--color-text-complement);
+	margin-top: 1.2rem;
+	color: var(--color-text-complement);
 }
 
 .total-connections img {
-    margin-left: 0.8rem;
+	margin-left: 0.8rem;
 }
 
 .buttons-container {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    margin: 3.2rem 0;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	margin: 3.2rem 0;
 }
 
 .buttons-container a {
-    width: 30rem;
-    height: 10.4rem;
-    border-radius: 0.8rem;
-    margin-right: 1.6rem;
-    font: 700 2.0rem Archivo;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width: 30rem;
+	height: 10.4rem;
+	border-radius: 0.8rem;
+	margin-right: 1.6rem;
+	font: 700 2rem Archivo;
 
-    text-decoration: none;
-    color: var(--color-button-text);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    transition: background-color 0.2s;
+	text-decoration: none;
+	color: var(--color-button-text);
 
-    padding: 1.2rem;
+	transition: background-color 0.2s;
+
+	padding: 1.2rem;
 }
 
 .buttons-container a + a {
-    margin-right: 0rem;
+	margin-right: 0rem;
 }
 
 .buttons-container a:first-child {
-    margin-right: 1.6rem;
+	margin-right: 1.6rem;
 }
 
 .buttons-container a img {
-    width: 4rem;
+	width: 4rem;
 }
 
 .buttons-container a.study {
-    background: var(--color-primary-lighter);
+	background: var(--color-primary-lighter);
 }
 
 .buttons-container a.give-classes {
-    background: var(--color-secundary);
+	background: var(--color-secundary);
 }
 
 .buttons-container a.study:hover {
-    background: var(--color-primary-light);
+	background: var(--color-primary-light);
 }
 
 .buttons-container a.give-classes:hover {
-    background: var(--color-secundary-dark);
+	background: var(--color-secundary-dark);
 }
 
 .buttons-container a img {
-    margin-right: 1.6rem;
+	margin-right: 1.6rem;
 }
 
 @media (min-width: 1000px) {
-    .page-landing-header {
-        max-width: 1200px;
-    }
+	.page-landing-header {
+		max-width: 1200px;
+	}
 
-    .logo-content-container {
-        padding: 0 5rem;
-        max-width: 1200px;
-        flex-flow: row;
-        justify-content: space-between;
-    }
+	.logo-content-container {
+		padding: 0 5rem;
+		max-width: 1200px;
+		flex-flow: row;
+		justify-content: space-between;
+	}
 
-    .page-landing-header {
-        grid-area: header;
-    }
+	.page-landing-header {
+		grid-area: header;
+	}
 
-    .logo-container {
-        align-self: center;
-        text-align: left;
-        margin: 0;
-    }
+	.logo-container {
+		align-self: center;
+		text-align: left;
+		margin: 0;
+	}
 
-    .logo-container img {
-        height: 100%;
-    }
+	.logo-container img {
+		height: 100%;
+	}
 
-    .logo-container h2 {
-        text-align: initial;
-        font-size: 3.6rem;
-        max-width: 400px;
-    }
+	.logo-container h2 {
+		text-align: initial;
+		font-size: 3.6rem;
+		max-width: 400px;
+	}
 
-    .hero-image-container {
-        max-width: 600px;
-    }
+	.hero-image-container {
+		max-width: 600px;
+	}
 
-    .bottom-container {
-        padding: 0 5rem;
-        display: grid;
-        max-width: 1200px;
-        align-items: center;
-        grid-template-rows: 1fr;
-        grid-template-columns: 2fr 1fr 3fr;
-        grid-template-areas: 
-            "welcome total buttons"
-        ;
-    }
+	.bottom-container {
+		padding: 0 5rem;
+		display: grid;
+		max-width: 1200px;
+		align-items: center;
+		grid-template-rows: 1fr;
+		grid-template-columns: 2fr 1.5fr 3.5fr;
+		grid-template-areas: 'welcome total buttons';
+	}
 
-    .bottom-container p {
-        grid-area: welcome;
-        text-align: left;
-    }
+	.bottom-container p {
+		grid-area: welcome;
+		text-align: left;
+	}
 
-    .buttons-container {
-        justify-self: center;
-        grid-area: buttons;
-        justify-content: flex-start;
-    }
+	.buttons-container {
+		justify-self: center;
+		grid-area: buttons;
+		justify-content: flex-start;
+	}
 
-    .buttons-container a {
-        font-size: 2.4rem;
-    }
+	.buttons-container a {
+		font-size: 2.4rem;
+	}
 
-    .buttons-container a img {
-        margin-right: 2.6rem;
-    }
+	.buttons-container a img {
+		margin-right: 2.6rem;
+	}
 
-    .total-connections {
-        grid-area: total;
-        text-align: right;
-        justify-self: end;
-    }
+	.total-connections {
+		grid-area: total;
+		text-align: right;
+		justify-self: end;
+	}
 }

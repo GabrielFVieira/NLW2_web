@@ -1,90 +1,90 @@
 #page-teacher-list {
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 }
 
 #search-teachers {
-    margin-top: 3.2rem;
+	margin-top: 3.2rem;
 }
 
 #search-teachers .input-block {
-    margin-top: 1.4rem;
+	margin-top: 1.4rem;
 }
 
 #search-teachers label {
-    color: var(--color-text-in-primary)
+	color: var(--color-text-in-primary);
 }
 
 #search-teachers button {
-    width: 100%;
-    height: 5.6rem;
-    background: var(--color-secundary);
-    color: var(--color-button-text);
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    font: 700 1.6rem Archivo;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    margin-top: 3.2rem;
+	width: 100%;
+	height: 5.6rem;
+	background: var(--color-secundary);
+	color: var(--color-button-text);
+	border: 0;
+	border-radius: 0.8rem;
+	cursor: pointer;
+	font: 700 1.6rem Archivo;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	transition: background-color 0.2s;
+	margin-top: 3.2rem;
 }
 
 #search-teachers button:hover {
-    background: var(--color-secundary-dark);
+	background: var(--color-secundary-dark);
 }
 
 #page-teacher-list main {
-    margin: 3.2rem auto;
-    width: 90%;
+	margin: 3.2rem auto;
+	width: 90%;
 }
 
 #page-teacher-list main .emptyMessage,
 .endingMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #page-teacher-list main .emptyMessage {
-    margin-top: 6.5rem;
+	margin-top: 6.5rem;
 }
 
-.endingMessage{
-    margin-top: 3.5rem;
+.endingMessage {
+	margin-top: 3.5rem;
 }
 
-#page-teacher-list main .emptyMessage p, 
+#page-teacher-list main .emptyMessage p,
 .endingMessage p {
-    text-align: center;
-    max-width: 25rem;
-    color: var(--color-text-complement);
+	text-align: center;
+	max-width: 25rem;
+	color: var(--color-text-complement);
 }
 
 @media (min-width: 700px) {
-    #page-teacher-list {
-        max-width: 100%;
-    }
+	#page-teacher-list {
+		max-width: 100%;
+	}
 
-    #search-teachers {
-        display: grid;
-        grid-template-columns: 2fr 2fr 2fr 1fr;
-        column-gap: 16px;
-        position: absolute;
-        bottom: -28px;
-    }
+	#search-teachers {
+		display: grid;
+		grid-template-columns: 2fr 2fr 2fr 1fr;
+		column-gap: 16px;
+		position: absolute;
+		bottom: -28px;
+	}
 
-    #search-teachers .input-block + .input-block,
-    #search-teachers .select-block + .select-block,
-    #search-teachers .input-block {
-        margin-top: 0;
-    }
+	#search-teachers .input-block + .input-block,
+	#search-teachers .select-block + .select-block,
+	#search-teachers .input-block {
+		margin-top: 0;
+	}
 
-    #page-teacher-list main {
-        padding: 3.2rem 0;
-        max-width: 100rem;
-        margin: 0 auto;
-    }
+	#page-teacher-list main {
+		padding: 3.2rem 0;
+		max-width: 100rem;
+		margin: 0 auto;
+	}
 }

@@ -1,180 +1,180 @@
 .user-class-item {
-    padding-top: 2rem;
-    border-top: 2px solid var(--color-line-in-white);
-    border-left: 2px solid var(--color-line-in-white);
-    border-right: 2px solid var(--color-line-in-white);
+	padding-top: 2rem;
+	border-top: 2px solid var(--color-line-in-white);
+	border-left: 2px solid var(--color-line-in-white);
+	border-right: 2px solid var(--color-line-in-white);
 }
 
 .user-class-item + .user-class-item {
-    margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .user-class-item .user-class-item-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2rem;
 }
 
 .user-class-item .textarea-block {
-    padding: 0 2rem;
+	padding: 0 2rem;
 }
 
 .user-class-item .user-class-item-container + .textarea-block {
-    margin-top: 1.4rem;
+	margin-top: 1.4rem;
 }
 
 .user-class-item .input-block + .textarea-block,
 .user-class-item .select-block + .input-block {
-    margin-top: 2.4rem;
+	margin-top: 2.4rem;
 }
 
 .user-class-item .user-class-item-container .input-block,
 .user-class-item .input-block,
 .user-class-item .select-block,
 .user-class-item .schedule-item .hour-container {
-    width: 100%;
+	width: 100%;
 }
 
 .schedule-item .hour-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 1.4rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 1.4rem;
 }
 
 .user-class-item .schedule-item .hour-container .input-block {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .user-class-item .schedule-item .hour-container .input-block + .input-block {
-    margin-left: 1.6rem;
+	margin-left: 1.6rem;
 }
 
 .user-class-item .schedule-item {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 2rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 2rem;
 }
 
 .user-class-item .schedule-item + .schedule-item {
-    margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 .user-class-item h3 {
-    width: 100%;
-    height: 1px;
-    font: 700 1.8rem Archivo;
-    background-color: var(--color-line-in-white);
-    line-height: 0.1em;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+	width: 100%;
+	height: 1px;
+	font: 700 1.8rem Archivo;
+	background-color: var(--color-line-in-white);
+	line-height: 0.1em;
+	margin-top: 3rem;
+	margin-bottom: 2rem;
 
-    display: inline-flex;
-    justify-content: space-between;
+	display: inline-flex;
+	justify-content: space-between;
 }
 
 .user-class-item h3 span {
-    background:#fff;
-    padding: 0 1rem;
-    margin: 0 2rem;
+	background: #fff;
+	padding: 0 1rem;
+	margin: 0 2rem;
 }
 
 .user-class-item h3 .add-schedule {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 .user-class-item h3 .add-schedule:hover {
-    color: var(--color-primary-dark);
-    cursor: pointer;
+	color: var(--color-primary-dark);
+	cursor: pointer;
 }
 
 .user-class-item .schedule-item-hour {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .user-class-item .schedule-item button {
-    width: 100%;
-    height: 5.6rem;
-    background: var(--color-danger);
-    color: var(--color-button-text);
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    font: 700 1.6rem Archivo;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    margin-top: 3.2rem;
+	width: 100%;
+	height: 5.6rem;
+	background: var(--color-danger);
+	color: var(--color-button-text);
+	border: 0;
+	border-radius: 0.8rem;
+	cursor: pointer;
+	font: 700 1.6rem Archivo;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	transition: background-color 0.2s;
+	margin-top: 3.2rem;
 }
 
 .user-class-item .schedule-item button:hover {
-    background: var(--color-danger-dark);
+	background: var(--color-danger-dark);
 }
 
 .user-class-item .schedule-item button:disabled {
-    background: var(--color-input-disabled);
-    cursor: default;
+	background: var(--color-input-disabled);
+	cursor: default;
 }
 
 .schedule-item-hour .input-block {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .user-class-item h2 {
-    width: 100%; 
-    text-align: center; 
-    font: 600 1.6rem Archivo;
-    border-bottom: 2px solid var(--color-line-in-white);
-    line-height: 0.1em;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+	width: 100%;
+	text-align: center;
+	font: 600 1.6rem Archivo;
+	border-bottom: 2px solid var(--color-line-in-white);
+	line-height: 0.1em;
+	margin-top: 3rem;
+	margin-bottom: 2rem;
 }
 
 .user-class-item h2 span {
-    color: var(--color-danger);
-    background:#fff;
-    padding:0 1rem; 
+	color: var(--color-danger);
+	background: #fff;
+	padding: 0 1rem;
 }
 
 .user-class-item h2 span:hover {
-    color: var(--color-danger-dark);
-    cursor: pointer;
+	color: var(--color-danger-dark);
+	cursor: pointer;
 }
 
-@media(min-width: 700px) {
-    .user-class-item .user-class-item-container {
-        flex-direction: row;
-    }
+@media (min-width: 700px) {
+	.user-class-item .user-class-item-container {
+		flex-direction: row;
+	}
 
-    .user-class-item .user-class-item-container .input-block {
-        width: 48%;
-        margin-top: 0;
-    }
+	.user-class-item .user-class-item-container .input-block {
+		width: 48%;
+		margin-top: 0;
+	}
 
-    .user-class-item .schedule-item .hour-container {
-        margin-top: 0;
-    }
+	.user-class-item .schedule-item .hour-container {
+		margin-top: 0;
+	}
 
-    .user-class-item .schedule-item {
-        display: grid;
-        grid-template-columns: 6fr 6fr 1fr;
-        column-gap: 1.6rem;
-    }
+	.user-class-item .schedule-item {
+		display: grid;
+		grid-template-columns: 6fr 6fr 1fr;
+		column-gap: 1.6rem;
+	}
 
-    .user-class-item .schedule-item .input-block {
-        margin-top: 0 !important;
-    }
+	.user-class-item .schedule-item .input-block {
+		margin-top: 0 !important;
+	}
 
-    .user-class-item .schedule-item button {
-        width: 8rem;
-    }
+	.user-class-item .schedule-item button {
+		width: 8rem;
+	}
 }

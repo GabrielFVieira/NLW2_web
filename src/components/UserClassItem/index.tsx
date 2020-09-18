@@ -14,111 +14,157 @@ import removeIcon from '../../assets/images/icons/remove.svg';
 import './styles.css';
 
 export interface UserClasses {
-    id: number,
-    subject: Subject,
-    cost: number,
-    schedules: Schedule[],
-    description?: string,
+	id: number;
+	subject: Subject;
+	cost: number;
+	schedules: Schedule[];
+	description?: string;
 }
 
 interface UserClassItemProps {
-    classe: UserClasses;
+	classe: UserClasses;
+	index: number;
+	onRemove(index: number): void;
+	onRemoveSchedule(id: number): void;
 }
 
-const UserClassItem:React.FC <UserClassItemProps> = ({ classe }) => {
-    const [description, setDescription] = useState('');
-    const [cost, setCost] = useState('');
-    const [subject, setSubject] = useState('');
+const UserClassItem: React.FC<UserClassItemProps> = ({ classe, index, onRemove, onRemoveSchedule }) => {
+	const [description, setDescription] = useState(classe.description);
+	const [cost, setCost] = useState(formatNumber(classe.cost));
+	const [subject] = useState(classe.subject.name);
 
-    const [schedules, setSchedules] = useState([
-        { to_formated: '', from_formated: '' } as Schedule
-    ]);
+	const defaultScheduleItem = { to_formated: '', from_formated: '' } as Schedule;
 
-    useEffect(() => {
-        if(classe.description) {
-            setDescription(classe.description);
-        }
+	const [schedules, setSchedules] = useState(
+		classe.schedules && classe.schedules.length > 0 ? (classe.schedules as Schedule[]) : [defaultScheduleItem]
+	);
 
-        setCost(formatNumber(classe.cost));
-        setSubject(classe.subject.name);
-        setSchedules(classe.schedules);
-    }, [classe]);
+	useEffect(() => {
+		classe.description = description;
+		classe.cost = Number(removeSpecialCharacters(cost));
+		classe.schedules = schedules;
+	}, [classe, description, cost, schedules]);
 
-    function formatNumber(value: number) {
-        let text = Number(value).toFixed(2).toString();
+	function formatNumber(value: number) {
+		let text = Number(value).toFixed(2).toString();
+		return text.padStart(5, '0');
+	}
 
-        return text.padStart(5, '0');
-    }
+	function handleRemove() {
+		onRemove(index);
+	}
 
-    function handleRemove() {
-        console.log('removing');
-    }
+	function addNewScheduleItem() {
+		setSchedules([...schedules, defaultScheduleItem]);
+	}
 
-    function addNewScheduleItem() {
-        setSchedules([
-            ...schedules,
-            { to_formated: '', from_formated: '' } as Schedule
-        ]);
-    }
+	function removeScheduleItem(scheduleIndex: number) {
+		const scheduleItemsOriginal = [...schedules];
+		const removedSchedules = scheduleItemsOriginal.splice(scheduleIndex, 1);
 
-    function removeScheduleItem(scheduleIndex: number) {
-        const scheduleItemsOriginal = [...schedules]
-        scheduleItemsOriginal.splice(scheduleIndex, 1)
-        setSchedules(scheduleItemsOriginal);
-    }
+		if (removedSchedules[0].id) {
+			onRemoveSchedule(removedSchedules[0].id);
+		}
 
-    function setScheduleItemValue(position: number, field: string, value: string) {
-        const updateScheduleItems = schedules.map((scheduleItem, index) => {
-            if(index === position) {
-                return {...scheduleItem, [field]: value};
-            }
+		setSchedules(scheduleItemsOriginal);
+	}
 
-            return scheduleItem;
-        });
+	function setScheduleItemValue(position: number, field: string, value: string | number) {
+		const updateScheduleItems = schedules.map((scheduleItem, index) => {
+			if (index === position) {
+				return { ...scheduleItem, [field]: value };
+			}
 
-        setSchedules(updateScheduleItems);
-    }
+			return scheduleItem;
+		});
 
-    return (
-        <div className="user-class-item">
-            <div className="user-class-item-container">
-                <Input name="subject" label="Matéria" value={subject} disabled/>
-                <Input name="cost" label="Custo da sua hora por aula" mask="R$99,99" pattern={currencyPattern.pattern} 
-                    title={currencyPattern.title} required value={cost} onChange={ (e) => {setCost(e.target.value)} }/>
-            </div>
+		setSchedules(updateScheduleItems);
+	}
 
-            <Textarea maxLength={1000} name="description" required value={description} label="Descrição da aula"
-            onChange={ (e) => {setDescription(e.target.value)} } />
+	function removeSpecialCharacters(text: string) {
+		return text.replace(/[^0-9.,]/g, '').replace(',', '.');
+	}
 
-            <h3>
-                <span>Horários</span>
-                <span className="add-schedule" onClick={addNewScheduleItem}>+ Novo horário</span>
-            </h3>
-                        
-            {schedules.map((scheduleItem, index) => {
-                return (
-                    <div key={index} className="schedule-item">
-                        <Select name="week-day" label="Dia da semana" value={scheduleItem.week_day} required
-                        onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)} options={weekDays}/>
+	return (
+		<div className="user-class-item">
+			<div className="user-class-item-container">
+				<Input name="subject" label="Matéria" value={subject} disabled />
+				<Input
+					name="cost"
+					label="Custo da sua hora por aula"
+					mask="R$99,99"
+					pattern={currencyPattern.pattern}
+					title={currencyPattern.title}
+					required
+					value={cost}
+					onChange={e => {
+						setCost(e.target.value);
+					}}
+				/>
+			</div>
 
-                        <div className="hour-container">
-                            <Input name="from" label="Das" type="time" required value={scheduleItem.from_formated} 
-                            onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}/>
+			<Textarea
+				maxLength={1000}
+				name="description"
+				required
+				value={description}
+				label="Descrição da aula"
+				onChange={e => {
+					setDescription(e.target.value);
+				}}
+			/>
 
-                            <Input name="to" label="Até" type="time" required value={scheduleItem.to_formated} 
-                            onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}/>
-                        </div>
+			<h3>
+				<span>Horários</span>
+				<span className="add-schedule" onClick={addNewScheduleItem}>
+					+ Novo horário
+				</span>
+			</h3>
 
-                        <button type="button" onClick={() => removeScheduleItem(index)} disabled={schedules.length <= 1}>
-                            <img src={removeIcon} alt="Remover"/>
-                        </button>
-                    </div>
-                )
-            })}
+			{schedules.map((scheduleItem, index) => {
+				return (
+					<div key={index} className="schedule-item">
+						<Select
+							name="week-day"
+							label="Dia da semana"
+							value={scheduleItem.week_day}
+							required
+							onChange={e => setScheduleItemValue(index, 'week_day', Number(e.target.value))}
+							options={weekDays}
+						/>
 
-            <h2><span onClick={handleRemove}>Excluir aula</span></h2>
-        </div>
-    );
-}
+						<div className="hour-container">
+							<Input
+								name="from"
+								label="Das"
+								type="time"
+								required
+								value={scheduleItem.from_formated}
+								onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}
+							/>
+
+							<Input
+								name="to"
+								label="Até"
+								type="time"
+								required
+								value={scheduleItem.to_formated}
+								onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}
+							/>
+						</div>
+
+						<button type="button" onClick={() => removeScheduleItem(index)} disabled={schedules.length <= 1}>
+							<img src={removeIcon} alt="Remover" />
+						</button>
+					</div>
+				);
+			})}
+
+			<h2>
+				<span onClick={handleRemove}>Excluir aula</span>
+			</h2>
+		</div>
+	);
+};
 
 export default UserClassItem;

@@ -3,75 +3,87 @@ import * as auth from '../services/auth';
 import api from '../services/api';
 
 export interface User {
-    id: string,
-    email: string,
-    password: string,
-    name: string,
-    surname: string,
-    bio?: string,
-    whatsapp?: string,
-    avatar?: string,
+	id: string;
+	email: string;
+	password: string;
+	name: string;
+	surname: string;
+	bio?: string;
+	whatsapp?: string;
+	avatar?: string;
 }
 
 interface AuthContextData {
-    signed: boolean;
-    user: User | null;
-    //loading: boolean;
-    signIn(email: string, password: string, remember: boolean): Promise<any>;
-    signOut(): void;
+	signed: boolean;
+	user: User | null;
+	//loading: boolean;
+	signIn(email: string, password: string, remember: boolean): Promise<any>;
+	signOut(): void;
+	updateUser(newUser: User): void;
 }
 
 interface AuthErrorResponse {
-    error?: string
+	error?: string;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
-    //const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-        const storagedUser = localStorage.getItem('@PAuth:user');
-        const storagedToken = localStorage.getItem('@PAuth:token');
+	const [user, setUser] = useState<User | null>(null);
+	//const [loading, setLoading] = useState(true);
 
-        if(storagedUser && storagedToken) {
-            api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
+	useEffect(() => {
+		const storagedUser = localStorage.getItem('@PAuth:user');
+		const storagedToken = localStorage.getItem('@PAuth:token');
 
-            setUser(JSON.parse(storagedUser));
-            //setLoading(false);
-        }
-    }, []);
+		if (storagedUser && storagedToken) {
+			api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
 
-    async function signIn(email: string, password: string, remember: boolean): Promise<any> {
-        const response = await auth.signIn(email, password);
+			setUser(JSON.parse(storagedUser));
+			//setLoading(false);
+		}
+	}, []);
 
-        if(response.error) {
-            return response;
-        }
+	async function signIn(email: string, password: string, remember: boolean): Promise<any> {
+		const response = await auth.signIn(email, password);
 
-        setUser(response.user)
+		if (response.error) {
+			return response;
+		}
 
-        api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
+		setUser(response.user);
 
-        if(remember) {
-            localStorage.setItem('@PAuth:user', JSON.stringify(response.user));
-            localStorage.setItem('@PAuth:token', response.token);
-        }
-    }
+		api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
 
-    function signOut() {
-        localStorage.clear();
-        setUser(null)
-    }
+		if (remember) {
+			localStorage.setItem('@PAuth:user', JSON.stringify(response.user));
+			localStorage.setItem('@PAuth:token', response.token);
+		}
+	}
 
-    return (
-        <AuthContext.Provider value={{ signed: !!user, user/*, loading*/, signIn, signOut }}>
-            {children}
-        </AuthContext.Provider>
-    );
+	function signOut() {
+		localStorage.clear();
+		setUser(null);
+	}
+
+	function updateUser(newUser: User) {
+		if (newUser.id === user?.id) {
+			setUser(newUser);
+
+			const storagedUser = localStorage.getItem('@PAuth:user');
+			if (storagedUser) {
+				localStorage.setItem('@PAuth:user', JSON.stringify(newUser));
+			}
+		}
+	}
+
+	return (
+		<AuthContext.Provider value={{ signed: !!user, user /*, loading*/, signIn, signOut, updateUser }}>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export function useAuth() {
-    return useContext(AuthContext);
+	return useContext(AuthContext);
 }

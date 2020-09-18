@@ -5,26 +5,28 @@ import eyeSlashIcon from '../../assets/images/icons/eye-slash.svg';
 
 import './styles.css';
 
-interface InputsProps extends InputHTMLAttributes <HTMLInputElement> {
-    name: string;
-    type: string;
+interface InputsProps extends InputHTMLAttributes<HTMLInputElement> {
+	name: string;
+	type: string;
 }
 
-const LoginInput: React.FC <InputsProps> = ({ name, type, ...rest }) => {
-    const [textVisible, setTextVisible] = useState(true);
+const LoginInput: React.FC<InputsProps> = ({ name, type, ...rest }) => {
+	const [textVisible, setTextVisible] = useState(true);
 
-    function handleToggleTextVisibility() {
-        setTextVisible(!textVisible);
-    }
+	function handleToggleTextVisibility() {
+		setTextVisible(!textVisible);
+	}
 
-    return (
-        <div className="login-input-block">
-            <input type={textVisible ? type : "text"} id={name} maxLength={30} {...rest} />
-            <span onClick={handleToggleTextVisibility}>
-                {type === "password" ? <img src={textVisible ? eyeIcon : eyeSlashIcon} alt="Revelar senha" className="icon"/> : null}
-            </span>
-        </div>
-    );
-}
+	return (
+		<div className="login-input-block">
+			<input type={textVisible ? type : 'text'} id={name} maxLength={30} {...rest} />
+			<span onClick={handleToggleTextVisibility}>
+				{type === 'password' ? (
+					<img src={textVisible ? eyeIcon : eyeSlashIcon} alt="Revelar senha" className="icon" />
+				) : null}
+			</span>
+		</div>
+	);
+};
 
 export default LoginInput;

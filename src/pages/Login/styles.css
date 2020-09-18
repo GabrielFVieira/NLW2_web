@@ -1,256 +1,256 @@
 #page-login {
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    color: var(--color-text-in-primary);
+	color: var(--color-text-in-primary);
 }
 
 #page-login-logo-content {
-    height: 35vh;
+	height: 35vh;
 }
 
 #page-login-input-content {
-    height: 65vh;
+	height: 65vh;
 }
 
 .login-container {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }
 
 #page-login-logo-content {
-    background: url('../../assets/images/login-background.svg') no-repeat center var(--color-primary);
-    background-size: contain;
-    background-origin: content-box;
-    padding: 2rem 4rem;
+	background: url('../../assets/images/login-background.svg') no-repeat center var(--color-primary);
+	background-size: contain;
+	background-origin: content-box;
+	padding: 2rem 4rem;
 }
 
 .page-logo-container img {
-    height: 10rem;
+	height: 10rem;
 }
 
 .page-logo-container h2 {
-    text-align: center;
-    font-weight: 500;
-    font-size: 3rem;
-    line-height: 4.6rem;
-    margin: 0.8rem 2rem 0;
+	text-align: center;
+	font-weight: 500;
+	font-size: 3rem;
+	line-height: 4.6rem;
+	margin: 0.8rem 2rem 0;
 }
 
 #page-login main {
-    width: 100%;
-    max-width: 40rem;
-    margin: auto 5rem;
+	width: 100%;
+	max-width: 40rem;
+	margin: auto 5rem;
 }
 
 #page-login main fieldset {
-    border: 0;
+	border: 0;
 }
 
 #page-login main fieldset legend {
-    width: 100%;
-    font: 700 3.8rem Poppins;
-    color: var(--color-text-title);
-    margin-bottom: 3rem;
-    text-align: left;
+	width: 100%;
+	font: 700 3.8rem Poppins;
+	color: var(--color-text-title);
+	margin-bottom: 3rem;
+	text-align: left;
 }
 
-#page-login-input-content .login-input-block  + .login-input-block  input {
-    border-bottom-left-radius: 0.8rem;
-    border-bottom-right-radius: 0.8rem;
+#page-login-input-content .login-input-block + .login-input-block input {
+	border-bottom-left-radius: 0.8rem;
+	border-bottom-right-radius: 0.8rem;
 }
 
 #page-login main footer {
-    padding-top: 1.5rem;
-    position: relative;
+	padding-top: 1.5rem;
+	position: relative;
 }
 
 #page-login main footer div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: var(--color-text-complement);
-    font: 500 1.6rem Poppins;
-    line-height: 2.4rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	color: var(--color-text-complement);
+	font: 500 1.6rem Poppins;
+	line-height: 2.4rem;
 }
 
 #page-login main footer div a {
-    text-decoration: none;
-    margin-top: 2.4rem;
-    align-self: center;
-    color: var(--color-text-complement);
+	text-decoration: none;
+	margin-top: 2.4rem;
+	align-self: center;
+	color: var(--color-text-complement);
 }
 
 #page-login main footer div a.recoverPassword:hover {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 #page-login main footer button {
-    width: 100%;
-    height: 5.6rem;
-    background: var(--color-input-disabled);
-    color: var(--color-text-complement);
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    font: 700 1.6rem Archivo;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    margin-top: 2.3rem;
+	width: 100%;
+	height: 5.6rem;
+	background: var(--color-input-disabled);
+	color: var(--color-text-complement);
+	border: 0;
+	border-radius: 0.8rem;
+	cursor: pointer;
+	font: 700 1.6rem Archivo;
+	text-decoration: none;
+	transition: background-color 0.2s;
+	margin-top: 2.3rem;
 }
 
 #page-login main footer button:hover {
-    background: var(--color-secundary-dark);
-    color: var(--color-button-text);
+	background: var(--color-secundary-dark);
+	color: var(--color-button-text);
 }
 
 #page-login main footer p {
-    position: absolute;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, 0);
-    text-align: center;
-    margin-top: 2rem;
-    color: var(--color-danger-dark);
+	position: absolute;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, 0);
+	text-align: center;
+	margin-top: 2rem;
+	color: var(--color-danger-dark);
 }
 
 .rememberChk {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .rememberChk input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    -webkit-tap-highlight-color: transparent;
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .checkmark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    margin-right: 1.2rem;
-    border-radius: 0.8rem;
-    background-color: var(--color-input-disabled);
-  }
-  
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.4rem;
+	height: 2.4rem;
+	margin-right: 1.2rem;
+	border-radius: 0.8rem;
+	background-color: var(--color-input-disabled);
+}
+
 .rememberChk:hover {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
-.rememberChk:hover input ~ .checkmark{
-    background-color: #ccc;
+.rememberChk:hover input ~ .checkmark {
+	background-color: #ccc;
 }
 
-.rememberChk input:checked ~ .checkmark{
-    background-color: var(--color-secundary);
+.rememberChk input:checked ~ .checkmark {
+	background-color: var(--color-secundary);
 }
 
 .rememberChk input:checked ~ .checkmark:after {
-    display: block;
+	display: block;
 }
 
 .rememberChk .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+	content: '';
+	position: absolute;
+	display: none;
 
-    width: 0.5rem;
-    height: 1rem;
-    border: solid white;
-    border-radius: 0.2rem;
-    border-width: 0 0.3rem 0.3rem 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    margin-bottom: 0.3rem;
-  }
+	width: 0.5rem;
+	height: 1rem;
+	border: solid white;
+	border-radius: 0.2rem;
+	border-width: 0 0.3rem 0.3rem 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	margin-bottom: 0.3rem;
+}
 
-.page-login-footer{
-    margin-top: 8rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+.page-login-footer {
+	margin-top: 8rem;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 
 .page-login-footer div {
-    text-align: left;
+	text-align: left;
 }
 
 .page-login-footer div p {
-    color: var(--color-text-base);
+	color: var(--color-text-base);
 }
 
 .page-login-footer span {
-    color: var(--color-text-complement);
+	color: var(--color-text-complement);
 }
 
 .register {
-    font-weight: 700;
-    color: var(--color-primary);
+	font-weight: 700;
+	color: var(--color-primary);
 }
 
 @media (min-width: 700px) {
-    #page-login {
-        flex-direction: row;
-    }
+	#page-login {
+		flex-direction: row;
+	}
 
-    #page-login main footer {
-        padding-top: 2.5rem;
-    }
+	#page-login main footer {
+		padding-top: 2.5rem;
+	}
 
-    #page-login main footer div {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+	#page-login main footer div {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
-    #page-login main footer div a {
-        margin-top: 0;
-    }
+	#page-login main footer div a {
+		margin-top: 0;
+	}
 
-    #page-login main footer button {
-        margin-top: 3.2rem;
-    }
+	#page-login main footer button {
+		margin-top: 3.2rem;
+	}
 
-    #page-login-logo-content {
-        width: 55vw;
-        min-height: 100vh;
-    }
-    
-    #page-login-input-content {
-        width: 45vw;
-        min-height: 100vh;
-    }
+	#page-login-logo-content {
+		width: 55vw;
+		min-height: 100vh;
+	}
 
-    .page-logo-container h2 {
-        max-width: 35rem;
-        text-align: initial;
-        font-size: 3.6rem;
-    }
+	#page-login-input-content {
+		width: 45vw;
+		min-height: 100vh;
+	}
 
-    #page-login-logo-content {
-        padding: 7rem 4rem;
-    }
+	.page-logo-container h2 {
+		max-width: 35rem;
+		text-align: initial;
+		font-size: 3.6rem;
+	}
 
-    .page-login-footer {
-        margin-bottom: 1.5rem;
-    }
+	#page-login-logo-content {
+		padding: 7rem 4rem;
+	}
+
+	.page-login-footer {
+		margin-bottom: 1.5rem;
+	}
 }

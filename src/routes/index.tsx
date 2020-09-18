@@ -6,9 +6,9 @@ import AuthRoutes from './auth.routes';
 import AppRoutes from './app.routes';
 
 function Routes() {
-    const { signed } = useAuth();
+	const { signed } = useAuth();
 
-    return signed ? <AppRoutes /> : <AuthRoutes />;
+	return signed ? <AppRoutes /> : <AuthRoutes />;
 }
 
 export default Routes;
