@@ -1,8 +1,9 @@
 import React, { useState, FormEvent } from 'react';
-import { Link /*, useHistory */ } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import LoginInput from '../../components/LoginInput';
+import AlertPanel from '../../components/AlertPanel';
 
 import logoImg from '../../assets/images/logo.svg';
 import backImg from '../../assets/images/icons/back.svg';
@@ -11,12 +12,20 @@ import backImg from '../../assets/images/icons/back.svg';
 import './styles.css';
 
 function Recovery() {
-	// const history = useHistory();
+	const history = useHistory();
 
 	const [email, setEmail] = useState('');
 
+	const [showAlert, setShowAlert] = useState(false);
+
 	function handleRecovery(e: FormEvent) {
 		e.preventDefault();
+
+		if (showAlert) {
+			return;
+		}
+
+		setShowAlert(true);
 	}
 
 	return (
@@ -61,6 +70,15 @@ function Recovery() {
 					<div></div>
 				</main>
 			</div>
+
+			{showAlert && (
+				<AlertPanel
+					title="Redefinição enviada!"
+					message="Boa, agora é só checar o e-mail que foi enviado para você
+						 	 redefinir sua senha e aproveitar os estudos."
+					buttonText="Voltar ao login"
+				/>
+			)}
 		</div>
 	);
 }

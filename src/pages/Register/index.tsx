@@ -11,6 +11,7 @@ import { passwordPattern } from '../../assets/utils/patterns';
 
 import api from '../../services/api';
 import './styles.css';
+import AlertPanel from '../../components/AlertPanel';
 
 function Register() {
 	const history = useHistory();
@@ -20,8 +21,14 @@ function Register() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [showAlert, setShowAlert] = useState(false);
+
 	function handleRegister(e: FormEvent) {
 		e.preventDefault();
+
+		if (showAlert) {
+			return;
+		}
 
 		api
 			.post('user', {
@@ -31,7 +38,7 @@ function Register() {
 				password,
 			})
 			.then(() => {
-				history.push('/register-success');
+				setShowAlert(true);
 			})
 			.catch(() => {
 				alert('Erro ao realizar cadastro');
@@ -112,6 +119,15 @@ function Register() {
 					<div></div>
 				</main>
 			</div>
+
+			{showAlert && (
+				<AlertPanel
+					title="Cadastro concluído"
+					message="Agora você faz parte da plataforma da Proffy. \n
+							 Tenha uma ótima experiência."
+					buttonText="Fazer login"
+				/>
+			)}
 		</div>
 	);
 }

@@ -52,7 +52,7 @@ const ScheduleBar: React.FC<ScheduleBarProps> = ({ schedules }) => {
 		<div className="schedule-bar">
 			{days.length > 0 &&
 				days.map((day: string, index: number) => {
-					return <ScheduleItem key={index} schedule={schedulesGrouped.get(index)} week_day={day} />;
+					return <ScheduleItem key={index} schedule={schedulesGrouped.get(index + 1)} week_day={day} />;
 				})}
 		</div>
 	);

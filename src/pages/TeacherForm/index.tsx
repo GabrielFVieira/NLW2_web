@@ -2,6 +2,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
+import AlertPanel from '../../components/AlertPanel';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
@@ -35,6 +36,8 @@ function TeacherForm() {
 	const [cost, setCost] = useState('');
 
 	const [schedules, setSchedules] = useState([{ to_formated: '', from_formated: '' } as Schedule]);
+
+	const [showAlert, setShowAlert] = useState(false);
 
 	useEffect(() => {
 		api.get('subjects').then(response => {
@@ -75,6 +78,10 @@ function TeacherForm() {
 	function handleCreateClass(e: FormEvent) {
 		e.preventDefault();
 
+		if (showAlert) {
+			return;
+		}
+
 		api
 			.post('classes', {
 				description,
@@ -83,8 +90,7 @@ function TeacherForm() {
 				schedules,
 			})
 			.then(() => {
-				alert('Cadastro realizado com sucesso!');
-				history.push('/');
+				setShowAlert(true);
 			})
 			.catch(() => {
 				alert('Erro ao realizar cadastro');
@@ -104,124 +110,134 @@ function TeacherForm() {
 				}}
 			/>
 
-			<main>
-				<form onSubmit={handleCreateClass}>
-					<fieldset>
-						<legend>Seus dados</legend>
-						<div className="teacher-info">
-							<div>
-								<img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon" />
-								<h2 className="proffy-name">{`${user?.name} ${user?.surname}`}</h2>
+			{!showAlert ? (
+				<main>
+					<form onSubmit={handleCreateClass}>
+						<fieldset>
+							<legend>Seus dados</legend>
+							<div className="teacher-info">
+								<div>
+									<img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon" />
+									<h2 className="proffy-name">{`${user?.name} ${user?.surname}`}</h2>
+								</div>
+
+								<Input
+									name="whatsapp"
+									label="Whatsapp"
+									mask="+99 (99) 99999-9999"
+									value={user && user.whatsapp ? user.whatsapp : ''}
+									disabled
+								/>
 							</div>
 
-							<Input
-								name="whatsapp"
-								label="Whatsapp"
-								mask="+99 (99) 99999-9999"
-								value={user && user.whatsapp ? user.whatsapp : ''}
-								disabled
-							/>
-						</div>
-
-						<Textarea
-							maxLength={1000}
-							name="description"
-							required
-							value={description}
-							label="Descrição da aula"
-							onChange={e => {
-								setDescription(e.target.value);
-							}}
-						/>
-					</fieldset>
-
-					<fieldset>
-						<legend>Sobre a aula</legend>
-
-						<div className="about-class-itens">
-							<Select
-								name="subject"
-								label="Matéria"
-								value={subject}
-								options={subjects}
+							<Textarea
+								maxLength={1000}
+								name="description"
 								required
+								value={description}
+								label="Descrição da aula"
 								onChange={e => {
-									setSubject(Number(e.target.value));
+									setDescription(e.target.value);
 								}}
 							/>
-							<Input
-								name="cost"
-								label="Custo da sua hora por aula"
-								mask="R$99,99"
-								pattern={currencyPattern.pattern}
-								title={currencyPattern.title}
-								required
-								value={cost}
-								onChange={e => {
-									setCost(e.target.value);
-								}}
-							/>
-						</div>
-					</fieldset>
+						</fieldset>
 
-					<fieldset>
-						<legend>
-							Horários disponíveis
-							<button type="button" onClick={addNewScheduleItem}>
-								+ Novo horário
-							</button>
-						</legend>
+						<fieldset>
+							<legend>Sobre a aula</legend>
 
-						{schedules.map((scheduleItem, index) => {
-							return (
-								<div key={index} className="schedule-item">
-									<Select
-										name="week-day"
-										label="Dia da semana"
-										value={scheduleItem.week_day}
-										required
-										onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
-										options={weekDays}
-									/>
+							<div className="about-class-itens">
+								<Select
+									name="subject"
+									label="Matéria"
+									value={subject}
+									options={subjects}
+									required
+									onChange={e => {
+										setSubject(Number(e.target.value));
+									}}
+								/>
+								<Input
+									name="cost"
+									label="Custo da sua hora por aula"
+									mask="R$99,99"
+									pattern={currencyPattern.pattern}
+									title={currencyPattern.title}
+									required
+									value={cost}
+									onChange={e => {
+										setCost(e.target.value);
+									}}
+								/>
+							</div>
+						</fieldset>
 
-									<div className="hour-container">
-										<Input
-											name="from"
-											label="Das"
-											type="time"
+						<fieldset>
+							<legend>
+								Horários disponíveis
+								<button type="button" onClick={addNewScheduleItem}>
+									+ Novo horário
+								</button>
+							</legend>
+
+							{schedules.map((scheduleItem, index) => {
+								return (
+									<div key={index} className="schedule-item">
+										<Select
+											name="week-day"
+											label="Dia da semana"
+											value={scheduleItem.week_day}
 											required
-											value={scheduleItem.from_formated}
-											onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}
+											onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
+											options={weekDays}
 										/>
 
-										<Input
-											name="to"
-											label="Até"
-											type="time"
-											required
-											value={scheduleItem.to_formated}
-											onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}
-										/>
+										<div className="hour-container">
+											<Input
+												name="from"
+												label="Das"
+												type="time"
+												required
+												value={scheduleItem.from_formated}
+												onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}
+											/>
+
+											<Input
+												name="to"
+												label="Até"
+												type="time"
+												required
+												value={scheduleItem.to_formated}
+												onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}
+											/>
+										</div>
+
+										<button type="button" onClick={() => removeScheduleItem(index)} disabled={schedules.length <= 1}>
+											<img src={removeIcon} alt="Remover" />
+										</button>
 									</div>
+								);
+							})}
+						</fieldset>
 
-									<button type="button" onClick={() => removeScheduleItem(index)} disabled={schedules.length <= 1}>
-										<img src={removeIcon} alt="Remover" />
-									</button>
-								</div>
-							);
-						})}
-					</fieldset>
-
-					<footer>
-						<p>
-							<img src={warningIcon} alt="Aviso importante" />
-							Importante! <br />
-							Preencha todos os dados
-						</p>
-						<button type="submit">Salvar cadastro</button>
-					</footer>
-				</form>
-			</main>
+						<footer>
+							<p>
+								<img src={warningIcon} alt="Aviso importante" />
+								Importante! <br />
+								Preencha todos os dados
+							</p>
+							<button type="submit">Salvar cadastro</button>
+						</footer>
+					</form>
+				</main>
+			) : (
+				<AlertPanel
+					title="Cadastro salvo!"
+					message="Tudo certo, seu cadastro está na nossa lista de professores. /n
+							 Agora é só ficar de olho no seu WhatsApp."
+					buttonText="Acessar lista"
+					buttonUrl="/study"
+				/>
+			)}
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/auth';
 
 import PageHeader from '../../components/PageHeader';
+import AlertPanel from '../../components/AlertPanel';
 import Textarea from '../../components/Textarea';
 import Input from '../../components/Input';
 import UserClassItem, { UserClasses } from '../../components/UserClassItem';
@@ -36,6 +37,8 @@ function UserPerfil() {
 	const [whatsapp, setWhatsapp] = useState('');
 	const [bio, setBio] = useState('');
 
+	const [showAlert, setShowAlert] = useState(false);
+
 	useEffect(() => {
 		api
 			.get('user-classes')
@@ -67,6 +70,10 @@ function UserPerfil() {
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
 
+		if (showAlert) {
+			return;
+		}
+
 		const userResponse = await updateUserBD();
 
 		await handleRemovedSchedules();
@@ -78,8 +85,7 @@ function UserPerfil() {
 			alert('Erro ao realizar cadastro');
 		} else {
 			updateUser(userResponse.data);
-			alert('Cadastro atualizado');
-			// history.push('/');
+			setShowAlert(true);
 		}
 	}
 
@@ -158,94 +164,102 @@ function UserPerfil() {
 				</div>
 			</PageHeader>
 
-			<main>
-				<form onSubmit={handleSubmit}>
-					<fieldset>
-						<legend>Seus dados</legend>
+			{!showAlert ? (
+				<main>
+					<form onSubmit={handleSubmit}>
+						<fieldset>
+							<legend>Seus dados</legend>
 
-						<div id="personal-data-inputs" className="user-info-input">
-							<Input
-								name="nome"
-								label="Nome"
-								type="text"
-								required
-								value={name}
-								onChange={e => {
-									setName(e.target.value);
-								}}
-							/>
-							<Input
-								name="sobrenome"
-								label="Sobrenome"
-								type="text"
-								required
-								value={surname}
-								onChange={e => {
-									setSurname(e.target.value);
-								}}
-							/>
-						</div>
-
-						<div id="contact-inputs" className="user-info-input">
-							<Input name="email" type="email" label="E-mail" disabled value={email} />
-							<Input
-								name="whatsapp"
-								label="Whatsapp"
-								mask="+99 (99) 99999-9999"
-								required
-								pattern={phonePattern.pattern}
-								title={phonePattern.title}
-								value={whatsapp}
-								onChange={e => {
-									setWhatsapp(e.target.value);
-								}}
-							/>
-						</div>
-
-						<Textarea
-							maxLength={300}
-							name="biografica"
-							label="Biografica"
-							required
-							value={bio}
-							onChange={e => {
-								setBio(e.target.value);
-							}}
-						/>
-					</fieldset>
-
-					<fieldset>
-						<legend>Suas aulas</legend>
-
-						{classes.length > 0 ? (
-							classes.map((classe: UserClasses, index: number) => {
-								return (
-									<UserClassItem
-										key={classe.id}
-										classe={classe}
-										index={index}
-										onRemove={handleRemoveClass}
-										onRemoveSchedule={handleRemovedSchedule}
-									/>
-								);
-							})
-						) : (
-							<div className="emptyMessage">
-								<p>Nenhuma aula cadastrada.</p>
+							<div id="personal-data-inputs" className="user-info-input">
+								<Input
+									name="nome"
+									label="Nome"
+									type="text"
+									required
+									value={name}
+									onChange={e => {
+										setName(e.target.value);
+									}}
+								/>
+								<Input
+									name="sobrenome"
+									label="Sobrenome"
+									type="text"
+									required
+									value={surname}
+									onChange={e => {
+										setSurname(e.target.value);
+									}}
+								/>
 							</div>
-						)}
-					</fieldset>
 
-					<footer>
-						<p>
-							<img src={warningIcon} alt="Aviso importante" />
-							Importante! <br />
-							Preencha todos os dados corretamente
-						</p>
-						<button type="submit">Salvar cadastro</button>
-					</footer>
-				</form>
-			</main>
+							<div id="contact-inputs" className="user-info-input">
+								<Input name="email" type="email" label="E-mail" disabled value={email} />
+								<Input
+									name="whatsapp"
+									label="Whatsapp"
+									mask="+99 (99) 99999-9999"
+									required
+									pattern={phonePattern.pattern}
+									title={phonePattern.title}
+									value={whatsapp}
+									onChange={e => {
+										setWhatsapp(e.target.value);
+									}}
+								/>
+							</div>
+
+							<Textarea
+								maxLength={300}
+								name="biografica"
+								label="Biografica"
+								required
+								value={bio}
+								onChange={e => {
+									setBio(e.target.value);
+								}}
+							/>
+						</fieldset>
+
+						<fieldset>
+							<legend>Suas aulas</legend>
+
+							{classes.length > 0 ? (
+								classes.map((classe: UserClasses, index: number) => {
+									return (
+										<UserClassItem
+											key={classe.id}
+											classe={classe}
+											index={index}
+											onRemove={handleRemoveClass}
+											onRemoveSchedule={handleRemovedSchedule}
+										/>
+									);
+								})
+							) : (
+								<div className="emptyMessage">
+									<p>Nenhuma aula cadastrada.</p>
+								</div>
+							)}
+						</fieldset>
+
+						<footer>
+							<p>
+								<img src={warningIcon} alt="Aviso importante" />
+								Importante! <br />
+								Preencha todos os dados corretamente
+							</p>
+							<button type="submit">Salvar cadastro</button>
+						</footer>
+					</form>
+				</main>
+			) : (
+				<AlertPanel
+					title="Cadastro atualizado!"
+					message="Tudo certo, você já pode voltar a navegar."
+					buttonText="Voltar"
+				/>
+			)}
 		</div>
 	);
 }
