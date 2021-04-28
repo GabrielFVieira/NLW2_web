@@ -1,5 +1,4 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import AlertPanel from '../../components/AlertPanel';
@@ -26,8 +25,6 @@ interface SubjectItem {
 }
 
 function TeacherForm() {
-	const history = useHistory();
-
 	const { user } = useAuth();
 	const [subjects, setSubjects] = useState([]);
 

@@ -22,6 +22,7 @@ function Login() {
 
 	async function handleLogin(e: FormEvent) {
 		e.preventDefault();
+		setErrorMsg('');
 
 		const response = await signIn(email, password, remember);
 
@@ -92,7 +93,7 @@ function Login() {
 
 							<button type="submit">Entrar</button>
 
-							<p>{errorMsg}</p>
+							<p className="page-login-error">{errorMsg}</p>
 						</footer>
 					</form>
 

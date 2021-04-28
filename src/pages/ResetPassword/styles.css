@@ -1,4 +1,4 @@
-#page-register {
+#page-reset {
 	width: 100vw;
 	height: 100vh;
 
@@ -8,33 +8,33 @@
 	color: var(--color-text-in-primary);
 }
 
-#page-register-logo-content {
+#page-reset-logo-content {
 	height: 35vh;
 }
 
-#page-register-input-content {
+#page-reset-input-content {
 	height: 65vh;
 }
 
-.register-container {
+.reset-container {
 	width: 100vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-#page-register-logo-content {
+#page-reset-logo-content {
 	background: url('../../assets/images/login-background.svg') no-repeat center var(--color-primary);
 	background-size: contain;
 	background-origin: content-box;
 	padding: 2rem 4rem;
 }
 
-.page-register-container img {
+.page-reset-container img {
 	height: 10rem;
 }
 
-.page-register-container h2 {
+.page-reset-container h2 {
 	text-align: center;
 	font-weight: 500;
 	font-size: 3rem;
@@ -42,7 +42,7 @@
 	margin: 0.8rem 2rem 0;
 }
 
-.register-container main {
+.reset-container main {
 	height: 100%;
 	width: 100%;
 	max-width: 40rem;
@@ -58,27 +58,27 @@
 	-webkit-tap-highlight-color: transparent;
 }
 
-#page-register main form fieldset {
+#page-reset main form fieldset {
 	border: 0;
 }
 
-#page-register main form fieldset legend {
+#page-reset main form fieldset legend {
 	width: 100%;
+	max-width: 35rem;
 	font: 700 3.8rem Poppins;
 	color: var(--color-text-title);
 	text-align: left;
 }
 
-#page-register main form fieldset p {
+#page-reset main form fieldset p {
 	width: 100%;
-	max-width: 30rem;
 	font: 500 2rem Poppins;
 	color: var(--color-text-base);
 	margin-bottom: 2rem;
 	text-align: left;
 }
 
-#page-register main form fieldset h2 {
+#page-reset main form fieldset h2 {
 	width: 100%;
 	font: 700 3.8rem Poppins;
 	color: var(--color-text-title);
@@ -88,16 +88,16 @@
 	justify-content: space-between;
 }
 
-#page-register main form fieldset .login-input-block:last-of-type input {
+#page-reset main form fieldset .login-input-block:last-of-type input {
 	border-bottom-left-radius: 0.8rem;
 	border-bottom-right-radius: 0.8rem;
 }
 
-#page-register main form footer {
+#page-reset main form footer {
 	padding-top: 1.5rem;
 }
 
-#page-register main form footer button {
+#page-reset main form footer button {
 	width: 100%;
 	height: 5.6rem;
 	background: var(--color-input-disabled);
@@ -114,12 +114,12 @@
 	margin-top: 0.5rem;
 }
 
-#page-register main form footer button:hover {
+#page-reset main form footer button:hover {
 	background: var(--color-secundary-dark);
 	color: var(--color-button-text);
 }
 
-#page-register .page-register-error {
+#page-reset .page-reset-error {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -130,7 +130,7 @@
 }
 
 @media (min-width: 700px) {
-	#page-register {
+	#page-reset {
 		flex-direction: row;
 
 		display: grid;
@@ -139,38 +139,38 @@
 		grid-template-areas: 'input logo';
 	}
 
-	#page-register-logo-content {
+	#page-reset-logo-content {
 		grid-area: logo;
 		width: 55vw;
 		height: 100vh;
 		min-height: 100%;
 	}
 
-	#page-register-input-content {
+	#page-reset-input-content {
 		grid-area: input;
 		width: 45vw;
 		height: 100vh;
 	}
 
-	.page-register-container h2 {
+	.page-reset-container h2 {
 		max-width: 35rem;
 		text-align: initial;
 		font-size: 3.6rem;
 	}
 
-	#page-register-logo-content {
+	#page-reset-logo-content {
 		padding: 7rem 4rem;
 	}
 
-	#page-register main form fieldset legend {
+	#page-reset main form fieldset legend {
 		margin-bottom: 1.2rem;
 	}
 
-	#page-register main form fieldset p {
+	#page-reset main form fieldset p {
 		margin-bottom: 3.8rem;
 	}
 
-	#page-register main form footer button {
+	#page-reset main form footer button {
 		margin-top: 3.2rem;
 		margin-bottom: 1.5rem;
 	}

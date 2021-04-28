@@ -5,7 +5,6 @@ import api from '../services/api';
 export interface User {
 	id: string;
 	email: string;
-	password: string;
 	name: string;
 	surname: string;
 	bio?: string;
@@ -16,21 +15,16 @@ export interface User {
 interface AuthContextData {
 	signed: boolean;
 	user: User | null;
-	//loading: boolean;
 	signIn(email: string, password: string, remember: boolean): Promise<any>;
 	signOut(): void;
+	recovery(email: string): Promise<any>;
 	updateUser(newUser: User): void;
-}
-
-interface AuthErrorResponse {
-	error?: string;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
 	const [user, setUser] = useState<User | null>(null);
-	//const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const storagedUser = localStorage.getItem('@PAuth:user');
@@ -40,7 +34,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 			api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
 
 			setUser(JSON.parse(storagedUser));
-			//setLoading(false);
 		}
 	}, []);
 
@@ -66,6 +59,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 		setUser(null);
 	}
 
+	async function recovery(email: string): Promise<any> {
+		return await auth.recovery(email);
+	}
+
 	function updateUser(newUser: User) {
 		if (newUser.id === user?.id) {
 			setUser(newUser);
@@ -78,7 +75,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ signed: !!user, user /*, loading*/, signIn, signOut, updateUser }}>
+		<AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, recovery, updateUser }}>
 			{children}
 		</AuthContext.Provider>
 	);

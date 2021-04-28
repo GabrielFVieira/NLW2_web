@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import RegisterRealized from '../pages/RegisterRealized';
 import Recovery from '../pages/Recovery';
+import ResetPassword from '../pages/ResetPassword';
 
 function AuthRoutes() {
 	return (
@@ -12,7 +13,8 @@ function AuthRoutes() {
 			<Route path="/" exact component={Login} />
 			<Route path="/register" component={Register} />
 			<Route path="/register-success" component={RegisterRealized} />
-			<Route path="/recovery" component={Recovery} />
+			<Route path="/recovery" exact component={Recovery} />
+			<Route path="/recovery/:token" exact component={ResetPassword} />
 		</BrowserRouter>
 	);
 }

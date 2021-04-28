@@ -96,6 +96,10 @@
 	color: var(--color-text-complement);
 }
 
+#user-form main form fieldset #password-data-inputs .login-input-block {
+	margin-right: 0rem;
+}
+
 #user-form main footer {
 	padding: 4rem 2.4rem;
 	background: var(--color-box-footer);
@@ -201,6 +205,10 @@
 	#contact-inputs .input-block + .input-block {
 		width: 34%;
 		margin-top: 0;
+	}
+
+	#user-form main form fieldset #password-data-inputs .login-input-block {
+		width: 32%;
 	}
 
 	#user-form main footer {

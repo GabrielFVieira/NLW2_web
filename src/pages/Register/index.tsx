@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import LoginInput from '../../components/LoginInput';
@@ -14,21 +14,16 @@ import './styles.css';
 import AlertPanel from '../../components/AlertPanel';
 
 function Register() {
-	const history = useHistory();
-
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [errorMsg, setErrorMsg] = useState('');
 	const [showAlert, setShowAlert] = useState(false);
 
 	function handleRegister(e: FormEvent) {
 		e.preventDefault();
-
-		if (showAlert) {
-			return;
-		}
 
 		api
 			.post('user', {
@@ -40,8 +35,13 @@ function Register() {
 			.then(() => {
 				setShowAlert(true);
 			})
-			.catch(() => {
-				alert('Erro ao realizar cadastro');
+			.catch(err => {
+				if (err.response) {
+					const data = err.response.data;
+					setErrorMsg(data.error);
+				} else {
+					setErrorMsg('Sistema de autenticação indisponível');
+				}
 			});
 	}
 
@@ -113,6 +113,8 @@ function Register() {
 
 						<footer>
 							<button type="submit">Concluir cadastro</button>
+
+							<p className="page-register-error">{errorMsg}</p>
 						</footer>
 					</form>
 
@@ -123,8 +125,7 @@ function Register() {
 			{showAlert && (
 				<AlertPanel
 					title="Cadastro concluído"
-					message="Agora você faz parte da plataforma da Proffy. \n
-							 Tenha uma ótima experiência."
+					message="Agora você faz parte da plataforma da Proffy. Tenha uma ótima experiência."
 					buttonText="Fazer login"
 				/>
 			)}

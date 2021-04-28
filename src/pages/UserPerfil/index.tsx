@@ -1,6 +1,4 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-
 import { useAuth } from '../../contexts/auth';
 
 import PageHeader from '../../components/PageHeader';
@@ -12,19 +10,13 @@ import UserClassItem, { UserClasses } from '../../components/UserClassItem';
 import userIcon from '../../assets/images/icons/user.svg';
 import warningIcon from '../../assets/images/icons/warning.svg';
 
-import { phonePattern } from '../../assets/utils/patterns';
+import { passwordPattern, phonePattern } from '../../assets/utils/patterns';
 
 import api from '../../services/api';
 import './styles.css';
-
-interface SubjectItem {
-	id: number;
-	name: string;
-}
+import LoginInput from '../../components/LoginInput';
 
 function UserPerfil() {
-	const history = useHistory();
-
 	const { user, updateUser } = useAuth();
 	const [classes, setClasses] = useState([] as UserClasses[]);
 	const [removedClasses, setRemovedClasses] = useState([] as number[]);
@@ -36,6 +28,10 @@ function UserPerfil() {
 	const [email, setEmail] = useState('');
 	const [whatsapp, setWhatsapp] = useState('');
 	const [bio, setBio] = useState('');
+
+	const [oldPassword, setOldPassword] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
 	const [showAlert, setShowAlert] = useState(false);
 
@@ -73,6 +69,13 @@ function UserPerfil() {
 		if (showAlert) {
 			return;
 		}
+		if (password !== '') {
+			const changePasswordResponse = await changePasswordBD();
+
+			if (changePasswordResponse.status !== 200) {
+				return;
+			}
+		}
 
 		const userResponse = await updateUserBD();
 
@@ -90,7 +93,7 @@ function UserPerfil() {
 	}
 
 	async function updateUserBD() {
-		return api.put('user', {
+		return await api.put('user', {
 			name,
 			surname,
 			avatar,
@@ -99,8 +102,21 @@ function UserPerfil() {
 		});
 	}
 
+	async function changePasswordBD() {
+		return await api
+			.post('user/changePassword', {
+				password,
+				oldPassword,
+			})
+			.then(response => response)
+			.catch(err => {
+				alert(err.response.data.error);
+				return err.response;
+			});
+	}
+
 	async function updateClassesBD() {
-		return api.post('classes', classes);
+		return await api.post('classes', classes);
 	}
 
 	function handleRemoveClass(index: number) {
@@ -219,6 +235,50 @@ function UserPerfil() {
 									setBio(e.target.value);
 								}}
 							/>
+						</fieldset>
+
+						<fieldset>
+							<legend>
+								Trocar senha <h6>(opcional)</h6>
+							</legend>
+							<div id="password-data-inputs" className="user-info-input">
+								<LoginInput
+									name="senhaAtual"
+									placeholder="Senha atual"
+									type="password"
+									pattern={passwordPattern.pattern}
+									title={passwordPattern.title}
+									required={password !== ''}
+									value={oldPassword}
+									onChange={e => {
+										setOldPassword(e.target.value);
+									}}
+								/>
+								<LoginInput
+									name="senha"
+									placeholder="Nova senha"
+									type="password"
+									pattern={passwordPattern.pattern}
+									title={passwordPattern.title}
+									required={false}
+									value={password}
+									onChange={e => {
+										setPassword(e.target.value);
+									}}
+								/>
+								<LoginInput
+									name="confirmarSenha"
+									placeholder="Confirmar senha"
+									type="password"
+									pattern={password}
+									title="As senhas não coincidem"
+									required={password !== ''}
+									value={passwordConfirmation}
+									onChange={e => {
+										setPasswordConfirmation(e.target.value);
+									}}
+								/>
+							</div>
 						</fieldset>
 
 						<fieldset>

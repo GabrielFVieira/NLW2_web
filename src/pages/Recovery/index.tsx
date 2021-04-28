@@ -1,6 +1,8 @@
 import React, { useState, FormEvent } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+
+import { useAuth } from '../../contexts/auth';
 
 import LoginInput from '../../components/LoginInput';
 import AlertPanel from '../../components/AlertPanel';
@@ -8,24 +10,29 @@ import AlertPanel from '../../components/AlertPanel';
 import logoImg from '../../assets/images/logo.svg';
 import backImg from '../../assets/images/icons/back.svg';
 
-// import api from '../../services/api';
 import './styles.css';
 
 function Recovery() {
-	const history = useHistory();
+	const { recovery } = useAuth();
 
 	const [email, setEmail] = useState('');
-
 	const [showAlert, setShowAlert] = useState(false);
+	const [isWaiting, setIsWaiting] = useState(false);
+	const [errorMsg, setErrorMsg] = useState('');
 
-	function handleRecovery(e: FormEvent) {
+	async function handleRecovery(e: FormEvent) {
 		e.preventDefault();
+		setErrorMsg('');
+		setIsWaiting(true);
 
-		if (showAlert) {
-			return;
+		const response = await recovery(email);
+		if (response && response.error) {
+			setErrorMsg(response.error);
+		} else {
+			setShowAlert(true);
 		}
 
-		setShowAlert(true);
+		setIsWaiting(false);
 	}
 
 	return (
@@ -63,7 +70,11 @@ function Recovery() {
 						</fieldset>
 
 						<footer>
-							<button type="submit">Enviar</button>
+							<button disabled={isWaiting} type="submit">
+								Enviar
+							</button>
+
+							<p className="page-recovery-error">{errorMsg}</p>
 						</footer>
 					</form>
 

@@ -18,3 +18,16 @@ export function signIn(email: string, password: string): Promise<any> {
 			return { error: 'Sistema de autenticação indisponível' };
 		});
 }
+
+export function recovery(email: string): Promise<any> {
+	return api
+		.post('recovery', { email, recoveryPage: window.location.href })
+		.then(response => response.data)
+		.catch(err => {
+			if (err.response) {
+				return err.response.data;
+			}
+
+			return { error: 'Sistema de recuperação indisponível' };
+		});
+}

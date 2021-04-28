@@ -119,6 +119,16 @@
 	color: var(--color-button-text);
 }
 
+#page-recovery .page-recovery-error {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	text-align: center;
+	margin-top: 2rem;
+	color: var(--color-danger-dark);
+}
+
 @media (min-width: 700px) {
 	#page-recovery {
 		flex-direction: row;
