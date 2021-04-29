@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, useEffect } from 'react';
+import { trackPromise } from 'react-promise-tracker';
 
 import PageHeader from '../../components/PageHeader';
 import AlertPanel from '../../components/AlertPanel';
@@ -37,13 +38,15 @@ function TeacherForm() {
 	const [showAlert, setShowAlert] = useState(false);
 
 	useEffect(() => {
-		api.get('subjects').then(response => {
-			const subjectsOptions = response.data.map((subjectItem: SubjectItem) => {
-				return { value: subjectItem.id, label: subjectItem.name };
-			});
+		trackPromise(
+			api.get('subjects').then(response => {
+				const subjectsOptions = response.data.map((subjectItem: SubjectItem) => {
+					return { value: subjectItem.id, label: subjectItem.name };
+				});
 
-			setSubjects(subjectsOptions);
-		});
+				setSubjects(subjectsOptions);
+			})
+		);
 	}, []);
 
 	function removeSpecialCharacters(text: string) {
@@ -79,19 +82,21 @@ function TeacherForm() {
 			return;
 		}
 
-		api
-			.post('classes', {
-				description,
-				subject: { id: subject },
-				cost: Number(removeSpecialCharacters(cost)),
-				schedules,
-			})
-			.then(() => {
-				setShowAlert(true);
-			})
-			.catch(() => {
-				alert('Erro ao realizar cadastro');
-			});
+		trackPromise(
+			api
+				.post('classes', {
+					description,
+					subject: { id: subject },
+					cost: Number(removeSpecialCharacters(cost)),
+					schedules,
+				})
+				.then(() => {
+					setShowAlert(true);
+				})
+				.catch(() => {
+					alert('Erro ao realizar cadastro');
+				})
+		);
 	}
 
 	return (

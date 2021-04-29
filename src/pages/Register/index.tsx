@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { trackPromise } from 'react-promise-tracker';
 
 import LoginInput from '../../components/LoginInput';
 
@@ -25,24 +26,26 @@ function Register() {
 	function handleRegister(e: FormEvent) {
 		e.preventDefault();
 
-		api
-			.post('user', {
-				name,
-				surname,
-				email,
-				password,
-			})
-			.then(() => {
-				setShowAlert(true);
-			})
-			.catch(err => {
-				if (err.response) {
-					const data = err.response.data;
-					setErrorMsg(data.error);
-				} else {
-					setErrorMsg('Sistema de autenticação indisponível');
-				}
-			});
+		trackPromise(
+			api
+				.post('user', {
+					name,
+					surname,
+					email,
+					password,
+				})
+				.then(() => {
+					setShowAlert(true);
+				})
+				.catch(err => {
+					if (err.response) {
+						const data = err.response.data;
+						setErrorMsg(data.error);
+					} else {
+						setErrorMsg('Sistema de autenticação indisponível');
+					}
+				})
+		);
 	}
 
 	return (

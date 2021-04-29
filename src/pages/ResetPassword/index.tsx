@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { trackPromise } from 'react-promise-tracker';
 
 import LoginInput from '../../components/LoginInput';
 import AlertPanel from '../../components/AlertPanel';
@@ -31,27 +32,29 @@ function ChangePassword() {
 
 		setIsWaiting(true);
 
-		api
-			.post(
-				'resetPassword',
-				{ password },
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			)
-			.then(() => {
-				setShowAlert(true);
-			})
-			.catch(err => {
-				if (err.response) {
-					const data = err.response.data;
-					setErrorMsg(data.error);
-				} else {
-					setErrorMsg('Sistema de autenticação indisponível');
-				}
-			});
+		trackPromise(
+			api
+				.post(
+					'resetPassword',
+					{ password },
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				)
+				.then(() => {
+					setShowAlert(true);
+				})
+				.catch(err => {
+					if (err.response) {
+						const data = err.response.data;
+						setErrorMsg(data.error);
+					} else {
+						setErrorMsg('Sistema de autenticação indisponível');
+					}
+				})
+		);
 
 		setIsWaiting(false);
 	}

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, useEffect } from 'react';
+import { trackPromise } from 'react-promise-tracker';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Classes } from '../../components/TeacherItem';
@@ -27,30 +28,36 @@ function TeacherList() {
 	const [time, setTime] = useState('');
 
 	useEffect(() => {
-		api.get('classes').then(response => {
-			setTeachers(response.data);
-			setTeacherCount(response.data.length);
-		});
+		trackPromise(
+			api.get('classes').then(response => {
+				setTeachers(response.data);
+				setTeacherCount(response.data.length);
+			})
+		);
 
-		api.get('subjects').then(response => {
-			const subjectsOptions = response.data.map((subjectItem: SubjectItem) => {
-				return { value: subjectItem.id, label: subjectItem.name };
-			});
+		trackPromise(
+			api.get('subjects').then(response => {
+				const subjectsOptions = response.data.map((subjectItem: SubjectItem) => {
+					return { value: subjectItem.id, label: subjectItem.name };
+				});
 
-			setSubjects(subjectsOptions);
-		});
+				setSubjects(subjectsOptions);
+			})
+		);
 	}, []);
 
 	async function searchTeacher(e: FormEvent) {
 		e.preventDefault();
 
-		const response = await api.get('classes', {
-			params: {
-				subject,
-				week_day,
-				time,
-			},
-		});
+		const response = await trackPromise(
+			api.get('classes', {
+				params: {
+					subject,
+					week_day,
+					time,
+				},
+			})
+		);
 
 		setTeachers(response.data);
 	}
@@ -63,7 +70,7 @@ function TeacherList() {
 				rightContent={{
 					image: smileIcon,
 					imageAlt: 'Sorriso',
-					text: `Nós temos ${teacherCount} professores.`,
+					text: `Nós temos ${teacherCount} ${teacherCount > 1 ? 'professores' : 'professor'}.`,
 				}}
 			>
 				<form id="search-teachers" onSubmit={searchTeacher}>

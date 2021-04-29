@@ -4,6 +4,7 @@ import './assets/styles/global.css';
 import Routes from './routes/index';
 import { AuthProvider } from './contexts/auth';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import LoadingPage from './pages/LoadingPage';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				</Helmet>
 
 				<Routes />
+				<LoadingPage />
 			</HelmetProvider>
 		</AuthProvider>
 	);

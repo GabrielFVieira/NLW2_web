@@ -106,7 +106,7 @@
 }
 
 #page-login main footer button:hover {
-	background: var(--color-secundary-dark);
+	background: var(--color-secondary-dark);
 	color: var(--color-button-text);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .rememberChk input:checked ~ .checkmark {
-	background-color: var(--color-secundary);
+	background-color: var(--color-secondary);
 }
 
 .rememberChk input:checked ~ .checkmark:after {

@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { trackPromise } from 'react-promise-tracker';
 
 import { useAuth } from '../../contexts/auth';
 
@@ -25,7 +26,7 @@ function Recovery() {
 		setErrorMsg('');
 		setIsWaiting(true);
 
-		const response = await recovery(email);
+		const response = await trackPromise(recovery(email));
 		if (response && response.error) {
 			setErrorMsg(response.error);
 		} else {

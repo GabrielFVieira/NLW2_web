@@ -115,7 +115,7 @@
 }
 
 #page-register main form footer button:hover {
-	background: var(--color-secundary-dark);
+	background: var(--color-secondary-dark);
 	color: var(--color-button-text);
 }
 

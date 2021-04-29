@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useAuth } from '../../contexts/auth';
+import { trackPromise } from 'react-promise-tracker';
 
 import PageHeader from '../../components/PageHeader';
 import AlertPanel from '../../components/AlertPanel';
@@ -36,16 +37,18 @@ function UserPerfil() {
 	const [showAlert, setShowAlert] = useState(false);
 
 	useEffect(() => {
-		api
-			.get('user-classes')
-			.then(response => {
-				if (response.status === 200) {
-					setClasses(response.data);
-				}
-			})
-			.catch(err => {
-				alert(err.response.data.error);
-			});
+		trackPromise(
+			api
+				.get('user-classes')
+				.then(response => {
+					if (response.status === 200) {
+						setClasses(response.data);
+					}
+				})
+				.catch(err => {
+					alert(err.response.data.error);
+				})
+		);
 	}, []);
 
 	useEffect(() => {
@@ -93,30 +96,34 @@ function UserPerfil() {
 	}
 
 	async function updateUserBD() {
-		return await api.put('user', {
-			name,
-			surname,
-			avatar,
-			whatsapp: removeSpecialCharacters(whatsapp),
-			bio,
-		});
+		return await trackPromise(
+			api.put('user', {
+				name,
+				surname,
+				avatar,
+				whatsapp: removeSpecialCharacters(whatsapp),
+				bio,
+			})
+		);
 	}
 
 	async function changePasswordBD() {
-		return await api
-			.post('user/changePassword', {
-				password,
-				oldPassword,
-			})
-			.then(response => response)
-			.catch(err => {
-				alert(err.response.data.error);
-				return err.response;
-			});
+		return await trackPromise(
+			api
+				.post('user/changePassword', {
+					password,
+					oldPassword,
+				})
+				.then(response => response)
+				.catch(err => {
+					alert(err.response.data.error);
+					return err.response;
+				})
+		);
 	}
 
 	async function updateClassesBD() {
-		return await api.post('classes', classes);
+		return await trackPromise(api.post('classes', classes));
 	}
 
 	function handleRemoveClass(index: number) {
@@ -139,35 +146,39 @@ function UserPerfil() {
 
 	async function handleRemovedClasses() {
 		const promises = removedClasses.map(async removedClass => {
-			const response = await api.delete('classes', {
-				headers: {
-					id: removedClass,
-				},
-			});
+			const response = await trackPromise(
+				api.delete('classes', {
+					headers: {
+						id: removedClass,
+					},
+				})
+			);
 
 			if (response.status !== 200) {
 				alert('Erro ao apagar classe');
 			}
 		});
 
-		await Promise.all(promises);
+		await trackPromise(Promise.all(promises));
 		setRemovedClasses([]);
 	}
 
 	async function handleRemovedSchedules() {
 		const promises = removedSchedules.map(async removedSchedule => {
-			const response = await api.delete('schedules', {
-				headers: {
-					id: removedSchedule,
-				},
-			});
+			const response = await trackPromise(
+				api.delete('schedules', {
+					headers: {
+						id: removedSchedule,
+					},
+				})
+			);
 
 			if (response.status !== 200) {
 				alert('Erro ao apagar horário');
 			}
 		});
 
-		await Promise.all(promises);
+		await trackPromise(Promise.all(promises));
 		setRemovedSchedules([]);
 	}
 

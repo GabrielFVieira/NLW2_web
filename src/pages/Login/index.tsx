@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { trackPromise } from 'react-promise-tracker';
 
 import LoginInput from '../../components/LoginInput';
 
@@ -24,7 +25,7 @@ function Login() {
 		e.preventDefault();
 		setErrorMsg('');
 
-		const response = await signIn(email, password, remember);
+		const response = await trackPromise(signIn(email, password, remember));
 
 		if (response && response.error) {
 			setErrorMsg(response.error);
