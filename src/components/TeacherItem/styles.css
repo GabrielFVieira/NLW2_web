@@ -36,7 +36,7 @@
 }
 
 .teacher-item > p {
-	padding: 0 2rem;
+	padding: 0 3.2rem;
 	font-size: 1.6rem;
 	line-height: 2.8rem;
 }
@@ -81,10 +81,6 @@
 	.teacher-item header,
 	.teacher-item footer {
 		padding: 3.2rem;
-	}
-
-	.teacher-item > p {
-		padding: 0 3.2rem;
 	}
 
 	.teacher-item footer p strong {

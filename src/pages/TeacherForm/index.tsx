@@ -229,7 +229,7 @@ function TeacherForm() {
 			) : (
 				<AlertPanel
 					title="Cadastro salvo!"
-					message="Tudo certo, seu cadastro está na nossa lista de professores. /n
+					message="Tudo certo, seu cadastro está na nossa lista de professores.
 							 Agora é só ficar de olho no seu WhatsApp."
 					buttonText="Acessar lista"
 					buttonUrl="/study"

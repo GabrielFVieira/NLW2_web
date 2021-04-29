@@ -35,6 +35,10 @@ const TeacherItem: React.FC<ClassItemProps> = ({ teacher }) => {
 	}
 
 	function formatMoney(value: number) {
+		if (value == 0) {
+			return 'Grátis';
+		}
+
 		var formatter = new Intl.NumberFormat('pt-BR', {
 			style: 'currency',
 			currency: 'BRL',

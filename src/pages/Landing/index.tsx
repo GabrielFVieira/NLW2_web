@@ -33,7 +33,7 @@ function Landing() {
 		<div id="page-landing">
 			<div id="page-landing-top">
 				<div className="page-landing-header">
-					<Link to="/user-info" className="user-info">
+					<Link to="/user" className="user-info">
 						<img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon" />
 						{user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
 					</Link>

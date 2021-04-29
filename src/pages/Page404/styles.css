@@ -1,4 +1,4 @@
-#page-register-realized {
+#page-404 {
 	width: 100vw;
 	height: 100vh;
 
@@ -24,6 +24,7 @@
 	font: 700 5.6rem Archivo;
 	color: var(--color-title-in-primary);
 	margin-top: 2.8rem;
+	padding: 0 2rem 0 2rem;
 	text-align: center;
 }
 
@@ -31,10 +32,11 @@
 	font: 500 1.6rem Poppins;
 	color: var(--color-text-in-primary);
 	margin-top: 2rem;
+	padding: 0 2rem 0 2rem;
 	text-align: center;
 }
 
-#page-register-realized button {
+#page-404 button {
 	width: 20rem;
 	height: 5.6rem;
 	min-height: 50px;
@@ -53,6 +55,6 @@
 	margin-bottom: 1.2rem;
 }
 
-#page-register-realized button:hover {
+#page-404 button:hover {
 	background: var(--color-secundary-dark);
 }
