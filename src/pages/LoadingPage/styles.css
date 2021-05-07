@@ -6,7 +6,7 @@
 
 	background-color: #cccccc30;
 
-	position: absolute;
+	position: fixed;
 
 	display: flex;
 	align-items: center;

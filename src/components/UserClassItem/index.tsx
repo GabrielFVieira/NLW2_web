@@ -33,7 +33,7 @@ const UserClassItem: React.FC<UserClassItemProps> = ({ classe, index, onRemove, 
 	const [cost, setCost] = useState(formatNumber(classe.cost));
 	const [subject] = useState(classe.subject.name);
 
-	const defaultScheduleItem = { to_formated: '', from_formated: '' } as Schedule;
+	const defaultScheduleItem = { to: '', from: '' } as Schedule;
 
 	const [schedules, setSchedules] = useState(
 		classe.schedules && classe.schedules.length > 0 ? (classe.schedules as Schedule[]) : [defaultScheduleItem]
@@ -139,8 +139,8 @@ const UserClassItem: React.FC<UserClassItemProps> = ({ classe, index, onRemove, 
 								label="Das"
 								type="time"
 								required
-								value={scheduleItem.from_formated}
-								onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}
+								value={scheduleItem.from}
+								onChange={e => setScheduleItemValue(index, 'from', e.target.value)}
 							/>
 
 							<Input
@@ -148,8 +148,8 @@ const UserClassItem: React.FC<UserClassItemProps> = ({ classe, index, onRemove, 
 								label="Até"
 								type="time"
 								required
-								value={scheduleItem.to_formated}
-								onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}
+								value={scheduleItem.to}
+								onChange={e => setScheduleItemValue(index, 'to', e.target.value)}
 							/>
 						</div>
 

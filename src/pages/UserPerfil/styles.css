@@ -35,10 +35,35 @@
 	background-origin: content-box;
 }
 
-#user-form .page-header .user-header .user-icon {
-	width: 18rem;
+#user-icon {
+	border: 1px solid var(--color-line-in-white);
+	background-size: cover;
+	cursor: pointer;
 	height: 18rem;
+	width: 18rem;
 	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#user-icon input {
+	display: none;
+}
+
+#user-icon .camera-container {
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#user-icon .camera-container:hover {
+	opacity: 100;
 }
 
 #user-form .page-header .user-header h2 {

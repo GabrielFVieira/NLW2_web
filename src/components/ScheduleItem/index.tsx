@@ -3,8 +3,8 @@ import React from 'react';
 import './styles.css';
 
 export interface ScheduleItemInterface {
-	to_formated: string[];
-	from_formated: string[];
+	to: string[];
+	from: string[];
 }
 
 interface ScheduleProps {
@@ -23,9 +23,9 @@ const ScheduleItem: React.FC<ScheduleProps> = ({ schedule, week_day }) => {
 			<div className="schedule-item-container">
 				<p className="schedule-item-label">Horário</p>
 				{schedule &&
-					schedule.from_formated.length > 0 &&
-					schedule.from_formated.map((from: string, index: number) => {
-						return <p key={index} className="schedule-item-value">{`${from} - ${schedule.to_formated[index]}`}</p>;
+					schedule.from.length > 0 &&
+					schedule.from.map((from: string, index: number) => {
+						return <p key={index} className="schedule-item-value">{`${from} - ${schedule.to[index]}`}</p>;
 					})}
 			</div>
 		</div>

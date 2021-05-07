@@ -33,7 +33,7 @@ function TeacherForm() {
 	const [subject, setSubject] = useState(0);
 	const [cost, setCost] = useState('');
 
-	const [schedules, setSchedules] = useState([{ to_formated: '', from_formated: '' } as Schedule]);
+	const [schedules, setSchedules] = useState([{ to: '', from: '' } as Schedule]);
 
 	const [showAlert, setShowAlert] = useState(false);
 
@@ -54,7 +54,7 @@ function TeacherForm() {
 	}
 
 	function addNewScheduleItem() {
-		setSchedules([...schedules, { to_formated: '', from_formated: '' } as Schedule]);
+		setSchedules([...schedules, { to: '', from: '' } as Schedule]);
 	}
 
 	function removeScheduleItem(scheduleIndex: number) {
@@ -199,8 +199,8 @@ function TeacherForm() {
 												label="Das"
 												type="time"
 												required
-												value={scheduleItem.from_formated}
-												onChange={e => setScheduleItemValue(index, 'from_formated', e.target.value)}
+												value={scheduleItem.from}
+												onChange={e => setScheduleItemValue(index, 'from', e.target.value)}
 											/>
 
 											<Input
@@ -208,8 +208,8 @@ function TeacherForm() {
 												label="Até"
 												type="time"
 												required
-												value={scheduleItem.to_formated}
-												onChange={e => setScheduleItemValue(index, 'to_formated', e.target.value)}
+												value={scheduleItem.to}
+												onChange={e => setScheduleItemValue(index, 'to', e.target.value)}
 											/>
 										</div>
 

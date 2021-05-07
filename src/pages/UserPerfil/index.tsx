@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent, useEffect, useMemo } from 'react';
 import { useAuth } from '../../contexts/auth';
 import { trackPromise } from 'react-promise-tracker';
 
@@ -10,6 +10,7 @@ import UserClassItem, { UserClasses } from '../../components/UserClassItem';
 
 import userIcon from '../../assets/images/icons/user.svg';
 import warningIcon from '../../assets/images/icons/warning.svg';
+import cameraIcon from '../../assets/images/icons/camera.svg';
 
 import { passwordPattern, phonePattern } from '../../assets/utils/patterns';
 
@@ -25,7 +26,7 @@ function UserPerfil() {
 
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
-	const [avatar, setAvatar] = useState('');
+	const [avatar, setAvatar] = useState<any>(null);
 	const [email, setEmail] = useState('');
 	const [whatsapp, setWhatsapp] = useState('');
 	const [bio, setBio] = useState('');
@@ -55,12 +56,15 @@ function UserPerfil() {
 		if (user) {
 			setName(user.name);
 			setSurname(user.surname);
-			setAvatar(user.avatar ? user.avatar : '');
 			setEmail(user.email);
 			setWhatsapp(user.whatsapp ? user.whatsapp : '');
 			setBio(user.bio ? user.bio : '');
 		}
 	}, [user]);
+
+	const preview = useMemo(() => {
+		return avatar ? URL.createObjectURL(avatar) : user && user.avatar ? user.avatar : userIcon;
+	}, [user, avatar]);
 
 	function removeSpecialCharacters(text: string) {
 		return text.replace(/[^0-9.,]/g, '').replace(',', '.');
@@ -96,15 +100,16 @@ function UserPerfil() {
 	}
 
 	async function updateUserBD() {
-		return await trackPromise(
-			api.put('user', {
-				name,
-				surname,
-				avatar,
-				whatsapp: removeSpecialCharacters(whatsapp),
-				bio,
-			})
-		);
+		const data = new FormData();
+		data.append('name', name);
+		data.append('surname', surname);
+		data.append('avatar', avatar);
+		data.append('whatsapp', removeSpecialCharacters(whatsapp));
+		data.append('bio', bio);
+
+		console.log(avatar);
+
+		return await trackPromise(api.put('user', data));
 	}
 
 	async function changePasswordBD() {
@@ -186,7 +191,22 @@ function UserPerfil() {
 		<div id="user-form" className="container">
 			<PageHeader pageName="Meu Perfil">
 				<div className="user-header">
-					<img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon" />
+					<div className="user-icon-container">
+						<label id="user-icon" style={{ backgroundImage: `url(${preview})` }}>
+							<input
+								type="file"
+								onChange={event => {
+									if (event.target.files && event.target.files[0]) {
+										setAvatar(event.target.files[0]);
+									}
+								}}
+								accept=".jpg,.jpeg,.png"
+							/>
+							<div className="camera-container">
+								<img src={cameraIcon} alt="Adicionar foto" />
+							</div>
+						</label>
+					</div>
 					<h2>{user ? user.name + ' ' + user.surname : 'Usuário não identificado'}</h2>
 				</div>
 			</PageHeader>

@@ -7,8 +7,8 @@ import './styles.css';
 
 export interface Schedule {
 	id?: number;
-	to_formated: string;
-	from_formated: string;
+	to: string;
+	from: string;
 	week_day: number;
 }
 
@@ -29,17 +29,17 @@ const ScheduleBar: React.FC<ScheduleBarProps> = ({ schedules }) => {
 			const fromArray = [];
 			const toArray = [];
 
-			fromArray.push(schedule.from_formated);
-			toArray.push(schedule.to_formated);
+			fromArray.push(schedule.from);
+			toArray.push(schedule.to);
 
 			const item = {
-				from_formated: fromArray,
-				to_formated: toArray,
+				from: fromArray,
+				to: toArray,
 			};
 
 			if (schedulesFormated.has(schedule.week_day)) {
-				item.to_formated = item.to_formated.concat(schedulesFormated.get(schedule.week_day).to_formated);
-				item.from_formated = item.from_formated.concat(schedulesFormated.get(schedule.week_day).from_formated);
+				item.to = item.to.concat(schedulesFormated.get(schedule.week_day).to);
+				item.from = item.from.concat(schedulesFormated.get(schedule.week_day).from);
 			}
 
 			schedulesFormated.set(schedule.week_day, item);
