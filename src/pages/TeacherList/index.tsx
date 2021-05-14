@@ -70,7 +70,7 @@ function TeacherList() {
 				rightContent={{
 					image: smileIcon,
 					imageAlt: 'Sorriso',
-					text: `Nós temos ${teacherCount} ${teacherCount > 1 ? 'professores' : 'professor'}.`,
+					text: `Nós temos ${teacherCount} ${teacherCount > 1 || teacherCount == 0 ? 'professores' : 'professor'}.`,
 				}}
 			>
 				<form id="search-teachers" onSubmit={searchTeacher}>

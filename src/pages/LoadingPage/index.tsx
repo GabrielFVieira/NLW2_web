@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 import './styles.css';
 
 function LoadingPage() {
-	const { promiseInProgress } = usePromiseTracker({ delay: 200 });
+	const { promiseInProgress } = usePromiseTracker({ delay: 400 });
 
 	return promiseInProgress ? (
 		<div id="loading-page">
