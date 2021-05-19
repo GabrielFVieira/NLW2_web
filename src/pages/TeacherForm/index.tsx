@@ -10,6 +10,7 @@ import { currencyPattern } from '../../assets/utils/patterns';
 import { useAuth } from '../../contexts/auth';
 import { Schedule } from '../../components/ScheduleBar';
 
+import cancelIcon from '../../assets/images/icons/cancel.svg';
 import userIcon from '../../assets/images/icons/user.svg';
 import warningIcon from '../../assets/images/icons/warning.svg';
 import removeIcon from '../../assets/images/icons/remove.svg';
@@ -30,12 +31,18 @@ function TeacherForm() {
 	const [subjects, setSubjects] = useState([]);
 
 	const [description, setDescription] = useState('');
-	const [subject, setSubject] = useState(0);
+	const [subjectId, setSubjectId] = useState(0);
+
+	const [newSubject, setNewSubject] = useState('');
+	const [isNewSubject, setIsNewSubject] = useState(false);
+
 	const [cost, setCost] = useState('');
 
 	const [schedules, setSchedules] = useState([{ to: '', from: '' } as Schedule]);
 
 	const [showAlert, setShowAlert] = useState(false);
+
+	const newSubjectItem = { value: '-1', label: '+ Nova matéria' };
 
 	useEffect(() => {
 		trackPromise(
@@ -43,6 +50,8 @@ function TeacherForm() {
 				const subjectsOptions = response.data.map((subjectItem: SubjectItem) => {
 					return { value: subjectItem.id, label: subjectItem.name };
 				});
+
+				subjectsOptions.push(newSubjectItem);
 
 				setSubjects(subjectsOptions);
 			})
@@ -75,18 +84,20 @@ function TeacherForm() {
 		setSchedules(updateScheduleItems);
 	}
 
-	function handleCreateClass(e: FormEvent) {
+	async function handleCreateClass(e: FormEvent) {
 		e.preventDefault();
 
 		if (showAlert) {
 			return;
 		}
 
+		let subject = isNewSubject ? { name: newSubject } : { id: subjectId };
+
 		trackPromise(
 			api
 				.post('classes', {
 					description,
-					subject: { id: subject },
+					subject,
 					cost: Number(removeSpecialCharacters(cost)),
 					schedules,
 				})
@@ -94,9 +105,13 @@ function TeacherForm() {
 					setShowAlert(true);
 				})
 				.catch(() => {
-					alert('Erro ao realizar cadastro');
+					showError('Erro ao realizar cadastro');
 				})
 		);
+	}
+
+	function showError(message: String) {
+		alert(message);
 	}
 
 	return (
@@ -148,16 +163,44 @@ function TeacherForm() {
 							<legend>Sobre a aula</legend>
 
 							<div className="about-class-itens">
-								<Select
-									name="subject"
-									label="Matéria"
-									value={subject}
-									options={subjects}
-									required
-									onChange={e => {
-										setSubject(Number(e.target.value));
-									}}
-								/>
+								{!isNewSubject ? (
+									<Select
+										name="subject"
+										label="Matéria"
+										value={subjectId}
+										options={subjects}
+										required
+										onChange={e => {
+											if (e.target.value != newSubjectItem.value) {
+												setSubjectId(Number(e.target.value));
+											} else {
+												setSubjectId(0);
+												setIsNewSubject(true);
+											}
+										}}
+									/>
+								) : (
+									<Input
+										name="newSubject"
+										label="Nome da nova matéria"
+										required
+										value={newSubject}
+										maxLength={30}
+										onChange={e => {
+											setNewSubject(e.target.value);
+										}}
+									>
+										<img
+											className="icon"
+											onClick={e => {
+												setIsNewSubject(false);
+												setNewSubject('');
+											}}
+											src={cancelIcon}
+											alt="Cancelar nova matéria"
+										/>
+									</Input>
+								)}
 								<Input
 									name="cost"
 									label="Custo da sua hora por aula"

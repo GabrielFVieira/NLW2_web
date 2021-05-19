@@ -44,13 +44,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 			return response;
 		}
 
-		setUser(response.user);
+		if (response.user) {
+			setUser(response.user);
 
-		api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
+			api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
 
-		if (remember) {
-			localStorage.setItem('@PAuth:user', JSON.stringify(response.user));
-			localStorage.setItem('@PAuth:token', response.token);
+			if (remember) {
+				localStorage.setItem('@PAuth:user', JSON.stringify(response.user));
+				localStorage.setItem('@PAuth:token', response.token);
+			}
 		}
 	}
 
