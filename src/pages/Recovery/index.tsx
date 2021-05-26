@@ -18,22 +18,23 @@ function Recovery() {
 
 	const [email, setEmail] = useState('');
 	const [showAlert, setShowAlert] = useState(false);
-	const [isWaiting, setIsWaiting] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 
 	async function handleRecovery(e: FormEvent) {
 		e.preventDefault();
-		setErrorMsg('');
-		setIsWaiting(true);
 
-		const response = await trackPromise(recovery(email));
-		if (response && response.error) {
-			setErrorMsg(response.error);
-		} else {
-			setShowAlert(true);
+		if (showAlert) {
+			return;
 		}
 
-		setIsWaiting(false);
+		setErrorMsg('');
+
+		try {
+			await trackPromise(recovery(email));
+			setShowAlert(true);
+		} catch (err) {
+			setErrorMsg(err.message);
+		}
 	}
 
 	return (
@@ -71,9 +72,7 @@ function Recovery() {
 						</fieldset>
 
 						<footer>
-							<button disabled={isWaiting} type="submit">
-								Enviar
-							</button>
+							<button type="submit">Enviar</button>
 
 							<p className="page-recovery-error">{errorMsg}</p>
 						</footer>

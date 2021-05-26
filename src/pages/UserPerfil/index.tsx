@@ -47,7 +47,11 @@ function UserPerfil() {
 					}
 				})
 				.catch(err => {
-					alert(err.response.data.error);
+					if (err.response) {
+						alert(err.response.data.error);
+					} else {
+						alert('Sistema indisponível');
+					}
 				})
 		);
 	}, []);
@@ -76,26 +80,25 @@ function UserPerfil() {
 		if (showAlert) {
 			return;
 		}
-		if (password !== '') {
-			const changePasswordResponse = await changePasswordBD();
 
-			if (changePasswordResponse.status !== 200) {
-				return;
+		try {
+			if (password !== '') {
+				await changePasswordBD();
 			}
-		}
 
-		const userResponse = await updateUserBD();
-
-		await handleRemovedSchedules();
-		await handleRemovedClasses();
-
-		const classesResponse = await updateClassesBD();
-
-		if (userResponse.status !== 200 || classesResponse.status !== 200) {
-			alert('Erro ao realizar cadastro');
-		} else {
+			const userResponse = await updateUserBD();
+			await handleRemovedSchedules();
+			await handleRemovedClasses();
+			await updateClassesBD();
 			updateUser(userResponse.data);
+
 			setShowAlert(true);
+		} catch (err) {
+			if (err.response) {
+				alert(err.response.data.error);
+			} else {
+				alert('Sistema indisponível');
+			}
 		}
 	}
 
@@ -120,10 +123,6 @@ function UserPerfil() {
 					oldPassword,
 				})
 				.then(response => response)
-				.catch(err => {
-					alert(err.response.data.error);
-					return err.response;
-				})
 		);
 	}
 
@@ -151,17 +150,11 @@ function UserPerfil() {
 
 	async function handleRemovedClasses() {
 		const promises = removedClasses.map(async removedClass => {
-			const response = await trackPromise(
-				api.delete('classes', {
-					headers: {
-						id: removedClass,
-					},
-				})
-			);
-
-			if (response.status !== 200) {
-				alert('Erro ao apagar classe');
-			}
+			api.delete('classes', {
+				headers: {
+					id: removedClass,
+				},
+			});
 		});
 
 		await trackPromise(Promise.all(promises));
@@ -170,17 +163,11 @@ function UserPerfil() {
 
 	async function handleRemovedSchedules() {
 		const promises = removedSchedules.map(async removedSchedule => {
-			const response = await trackPromise(
-				api.delete('schedules', {
-					headers: {
-						id: removedSchedule,
-					},
-				})
-			);
-
-			if (response.status !== 200) {
-				alert('Erro ao apagar horário');
-			}
+			api.delete('schedules', {
+				headers: {
+					id: removedSchedule,
+				},
+			});
 		});
 
 		await trackPromise(Promise.all(promises));

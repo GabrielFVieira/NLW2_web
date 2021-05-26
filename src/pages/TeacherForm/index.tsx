@@ -42,8 +42,6 @@ function TeacherForm() {
 
 	const [showAlert, setShowAlert] = useState(false);
 
-	const newSubjectItem = { value: '-1', label: '+ Nova matéria' };
-
 	useEffect(() => {
 		trackPromise(
 			api.get('subjects').then(response => {
@@ -51,7 +49,7 @@ function TeacherForm() {
 					return { value: subjectItem.id, label: subjectItem.name };
 				});
 
-				subjectsOptions.push(newSubjectItem);
+				subjectsOptions.push({ value: '-1', label: '+ Nova matéria' });
 
 				setSubjects(subjectsOptions);
 			})
@@ -171,7 +169,7 @@ function TeacherForm() {
 										options={subjects}
 										required
 										onChange={e => {
-											if (e.target.value != newSubjectItem.value) {
+											if (Number(e.target.value) !== -1) {
 												setSubjectId(Number(e.target.value));
 											} else {
 												setSubjectId(0);

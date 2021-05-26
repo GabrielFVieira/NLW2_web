@@ -19,10 +19,15 @@ function Landing() {
 	const [totalConnections, setTotalConnections] = useState(0);
 
 	useEffect(() => {
-		api.get('connections').then(response => {
-			const { total } = response.data;
-			setTotalConnections(total);
-		});
+		api
+			.get('connections')
+			.then(response => {
+				const { total } = response.data;
+				setTotalConnections(total);
+			})
+			.catch(() => {
+				setTotalConnections(0);
+			});
 	}, []);
 
 	function handleLogout() {
@@ -62,7 +67,8 @@ function Landing() {
 					</p>
 
 					<span className="total-connections">
-						Total de {totalConnections} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo" />
+						Total de {totalConnections} {totalConnections !== 1 ? 'conexões já realizadas ' : 'conexão já realizada '}
+						<img src={purpleHeartIcon} alt="Coração roxo" />
 					</span>
 
 					<div className="buttons-container">

@@ -12,22 +12,24 @@ export function signIn(email: string, password: string): Promise<any> {
 		.then(response => response.data as Response)
 		.catch(err => {
 			if (err.response) {
-				return err.response.data;
+				throw new Error(err.response.data.error);
 			}
-
-			return { error: 'Sistema de autenticação indisponível' };
+			console.log(err);
+			throw new Error('Sistema de autenticação indisponível');
 		});
 }
 
 export function recovery(email: string): Promise<any> {
 	return api
 		.post('recovery', { email, recoveryPage: window.location.href })
-		.then(response => response.data)
+		.then(response => response.data as Response)
 		.catch(err => {
+			console.log(err);
+
 			if (err.response) {
-				return err.response.data;
+				throw new Error(err.response.data.error);
 			}
 
-			return { error: 'Sistema de recuperação indisponível' };
+			throw new Error('Sistema de recuperação indisponível');
 		});
 }

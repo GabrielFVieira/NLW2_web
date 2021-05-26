@@ -39,11 +39,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 	async function signIn(email: string, password: string, remember: boolean): Promise<any> {
 		const response = await auth.signIn(email, password);
-
-		if (response.error) {
-			return response;
-		}
-
 		if (response.user) {
 			setUser(response.user);
 

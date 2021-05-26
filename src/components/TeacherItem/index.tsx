@@ -35,7 +35,7 @@ const TeacherItem: React.FC<ClassItemProps> = ({ teacher }) => {
 	}
 
 	function formatMoney(value: number) {
-		if (value == 0) {
+		if (value === 0) {
 			console.log(teacher.user);
 
 			return 'Grátis';

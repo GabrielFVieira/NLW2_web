@@ -23,40 +23,28 @@ function ChangePassword() {
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 	const [showAlert, setShowAlert] = useState(false);
-	const [isWaiting, setIsWaiting] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 
 	async function handleReset(e: FormEvent) {
 		e.preventDefault();
+
+		if (showAlert) {
+			return;
+		}
+
 		setErrorMsg('');
 
-		setIsWaiting(true);
-
-		trackPromise(
-			api
-				.post(
-					'resetPassword',
-					{ password },
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				)
-				.then(() => {
-					setShowAlert(true);
-				})
-				.catch(err => {
-					if (err.response) {
-						const data = err.response.data;
-						setErrorMsg(data.error);
-					} else {
-						setErrorMsg('Sistema de autenticação indisponível');
-					}
-				})
-		);
-
-		setIsWaiting(false);
+		try {
+			await trackPromise(api.post('resetPassword', { password }, { headers: { Authorization: `Bearer ${token}` } }));
+			setShowAlert(true);
+		} catch (err) {
+			if (err.response) {
+				const data = err.response.data;
+				setErrorMsg(data.error);
+			} else {
+				setErrorMsg('Sistema de autenticação indisponível');
+			}
+		}
 	}
 
 	return (
@@ -109,10 +97,7 @@ function ChangePassword() {
 						</fieldset>
 
 						<footer>
-							<button disabled={isWaiting} type="submit">
-								Trocar senha
-							</button>
-
+							<button type="submit">Trocar senha</button>
 							<p className="page-reset-error">{errorMsg}</p>
 						</footer>
 					</form>

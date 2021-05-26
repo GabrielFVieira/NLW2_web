@@ -23,29 +23,25 @@ function Register() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [showAlert, setShowAlert] = useState(false);
 
-	function handleRegister(e: FormEvent) {
+	async function handleRegister(e: FormEvent) {
 		e.preventDefault();
 
-		trackPromise(
-			api
-				.post('user', {
-					name,
-					surname,
-					email,
-					password,
-				})
-				.then(() => {
-					setShowAlert(true);
-				})
-				.catch(err => {
-					if (err.response) {
-						const data = err.response.data;
-						setErrorMsg(data.error);
-					} else {
-						setErrorMsg('Sistema de autenticação indisponível');
-					}
-				})
-		);
+		if (showAlert) {
+			return;
+		}
+
+		setErrorMsg('');
+
+		try {
+			await trackPromise(api.post('user', { name, surname, email, password }));
+			setShowAlert(true);
+		} catch (err) {
+			if (err.response) {
+				setErrorMsg(err.response.data.error);
+			} else {
+				setErrorMsg('Sistema de autenticação indisponível');
+			}
+		}
 	}
 
 	return (

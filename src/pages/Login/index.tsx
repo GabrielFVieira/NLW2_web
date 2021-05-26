@@ -25,10 +25,10 @@ function Login() {
 		e.preventDefault();
 		setErrorMsg('');
 
-		const response = await trackPromise(signIn(email, password, remember));
-
-		if (response && response.error) {
-			setErrorMsg(response.error);
+		try {
+			await trackPromise(signIn(email, password, remember));
+		} catch (e) {
+			setErrorMsg(e.message);
 		}
 	}
 
