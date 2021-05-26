@@ -110,8 +110,6 @@ function UserPerfil() {
 		data.append('whatsapp', removeSpecialCharacters(whatsapp));
 		data.append('bio', bio);
 
-		console.log(avatar);
-
 		return await trackPromise(api.put('user', data));
 	}
 

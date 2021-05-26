@@ -14,7 +14,6 @@ export function signIn(email: string, password: string): Promise<any> {
 			if (err.response) {
 				throw new Error(err.response.data.error);
 			}
-			console.log(err);
 			throw new Error('Sistema de autenticação indisponível');
 		});
 }
@@ -24,8 +23,6 @@ export function recovery(email: string): Promise<any> {
 		.post('recovery', { email, recoveryPage: window.location.href })
 		.then(response => response.data as Response)
 		.catch(err => {
-			console.log(err);
-
 			if (err.response) {
 				throw new Error(err.response.data.error);
 			}
