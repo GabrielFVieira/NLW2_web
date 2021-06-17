@@ -21,7 +21,7 @@ export function signIn(email: string, password: string): Promise<any> {
 export function recovery(email: string): Promise<any> {
 	return api
 		.post('recovery', { email, recoveryPage: window.location.href })
-		.then(response => response.data as Response)
+		.then(response => response.data)
 		.catch(err => {
 			if (err.response) {
 				throw new Error(err.response.data.error);

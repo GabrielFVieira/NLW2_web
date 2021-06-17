@@ -20,6 +20,8 @@ function Recovery() {
 	const [showAlert, setShowAlert] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 
+	const [link, setLink] = useState(''); // Link for test email
+
 	async function handleRecovery(e: FormEvent) {
 		e.preventDefault();
 
@@ -30,7 +32,9 @@ function Recovery() {
 		setErrorMsg('');
 
 		try {
-			await trackPromise(recovery(email));
+			const response = await trackPromise(recovery(email));
+			setLink(response.recoveryLink);
+			
 			setShowAlert(true);
 		} catch (err) {
 			setErrorMsg(err.message);
@@ -85,10 +89,13 @@ function Recovery() {
 			{showAlert && (
 				<AlertPanel
 					title="Redefinição enviada!"
-					message="Boa, agora é só checar o e-mail que foi enviado para você
-						 	 redefinir sua senha e aproveitar os estudos."
+					message="Boa, agora é só checar o e-mail que foi enviado para você redefinir sua senha e aproveitar os estudos."
 					buttonText="Voltar ao login"
-				/>
+				>
+					<br/><br/>
+					<p>Essa é uma feature em desenvolvimento, segue link para email de recuperação da senha:</p>
+					<a href={link}>{link}</a>
+				</AlertPanel>
 			)}
 		</div>
 	);

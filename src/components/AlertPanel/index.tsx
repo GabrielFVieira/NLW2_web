@@ -12,7 +12,7 @@ interface AlertPanelProps {
 	buttonUrl?: string;
 }
 
-const AlertPanel: React.FC<AlertPanelProps> = ({ title, message, buttonText, buttonUrl }) => {
+const AlertPanel: React.FC<AlertPanelProps> = ({ title, message, buttonText, buttonUrl, children }) => {
 	const history = useHistory();
 
 	function handleClick() {
@@ -26,6 +26,8 @@ const AlertPanel: React.FC<AlertPanelProps> = ({ title, message, buttonText, but
 				<h1>{title}</h1>
 				<p>{message}</p>
 			</div>
+
+			{children}
 
 			<button onClick={handleClick}>{buttonText}</button>
 		</div>
