@@ -13,7 +13,13 @@ const Input: React.FC<InputsProps> = ({ name, label, mask, children, ...rest }) 
 	return (
 		<div className="input-block">
 			<label htmlFor={name}>{label}</label>
-			<InputMask mask={mask ? mask : ''} placeholder={mask ? mask : rest.placeholder} type="text" id={name} {...rest} />
+			<InputMask
+				mask={mask ? mask : ''}
+				placeholder={mask ? mask : rest.placeholder}
+				type="text"
+				name={name}
+				{...rest}
+			/>
 			{children}
 		</div>
 	);

@@ -35,7 +35,7 @@ const TeacherItem: React.FC<ClassItemProps> = ({ teacher }) => {
 	}
 
 	function formatMoney(value: number) {
-		if (value == 0) {
+		if (Number(value) === 0) {
 			return 'Grátis';
 		}
 
@@ -50,7 +50,11 @@ const TeacherItem: React.FC<ClassItemProps> = ({ teacher }) => {
 	return (
 		<article className="teacher-item">
 			<header>
-				<img src={teacher.user.avatar ? teacher.user.avatar : userIcon} alt={teacher.user.name} />
+				<img
+					src={teacher.user.avatar ? teacher.user.avatar : userIcon}
+					alt={teacher.user.name}
+					onError={event => (event.currentTarget.src = userIcon)}
+				/>
 				<div>
 					<strong>{`${teacher.user.name} ${teacher.user.surname}`}</strong>
 					<span>{teacher.subject.name}</span>

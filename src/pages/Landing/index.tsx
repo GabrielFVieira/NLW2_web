@@ -39,7 +39,12 @@ function Landing() {
 			<div id="page-landing-top">
 				<div className="page-landing-header">
 					<Link to="/user" className="user-info">
-						<img src={user && user.avatar ? user.avatar : userIcon} alt={user?.name} className="user-icon" />
+						<img
+							src={user && user.avatar ? user.avatar : userIcon}
+							alt={user?.name}
+							className="user-icon"
+							onError={event => (event.currentTarget.src = userIcon)}
+						/>
 						{user ? user.name + ' ' + user.surname : 'Usuário não identificado'}
 					</Link>
 

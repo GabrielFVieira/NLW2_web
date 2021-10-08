@@ -19,7 +19,7 @@ const LoginInput: React.FC<InputsProps> = ({ name, type, ...rest }) => {
 
 	return (
 		<div className="login-input-block">
-			<input type={textVisible ? type : 'text'} id={name} maxLength={30} {...rest} />
+			<input type={textVisible ? type : 'text'} name={name} maxLength={30} {...rest} />
 			<span onClick={handleToggleTextVisibility}>
 				{type === 'password' ? (
 					<img src={textVisible ? eyeIcon : eyeSlashIcon} alt="Revelar senha" className="icon" />

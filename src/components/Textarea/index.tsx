@@ -14,7 +14,7 @@ const Textarea: React.FC<TextAreaProps> = ({ name, label, ...rest }) => {
 				<label htmlFor={name}>{label}</label>
 				{rest.maxLength && <p>(Máximo {rest.maxLength} caracteres)</p>}
 			</div>
-			<textarea id={name} {...rest} />
+			<textarea name={name} {...rest} />
 		</div>
 	);
 };

@@ -35,6 +35,21 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 			setUser(JSON.parse(storagedUser));
 		}
+
+		api.interceptors.response.use(
+			response => {
+				return response;
+			},
+			error => {
+				if (error.response.status === 401) {
+					signOut();
+					console.log(error);
+
+					return error;
+				}
+				return Promise.reject(error);
+			}
+		);
 	}, []);
 
 	async function signIn(email: string, password: string, remember: boolean): Promise<any> {
